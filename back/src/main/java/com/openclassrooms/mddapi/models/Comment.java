@@ -1,7 +1,8 @@
-package com.openclassrooms.mddapi.model;
+package com.openclassrooms.mddapi.models;
+
+import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,9 +11,9 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
-import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,34 +23,31 @@ import lombok.NoArgsConstructor;
 @Data // annotation Lombok qui évite d'ajouter les getters et setters.
 @Builder
 @Entity // annotation qui indique que la classe correspond à une table de la BD.
-@Table(name = "users") // indique le nom de la table associée
+@Table(name = "comments") // indique le nom de la table associée
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class User {
+public class Comment {
 
-    @Schema(description = "User identifier", example = "1")
+    @Schema(description = "Comment identifier", example = "1")
     @Id // clé primaire de la table
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id est auto-incrémenté
-    private Integer user_id;
+    private Integer comment_id;
 
-    @Schema(description = "Username", example = "Robert")
-    private String username;
+    @Schema(description = "Post identifier", example = "1")
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
-    @Schema(description = "User email", example = "Robert@mail.com")
-    private String email;
+    @Schema(description = "User identifier", example = "1")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @Schema(description = "User password", example = "1243pass")
-    private String password;
+    @Schema(description = "Content", example = "Not agree with this article!.")
+    private String content;
 
     @Schema(description = "date this user was created", example = "2023-03-18T00:23:42")
     @CreatedDate
     private LocalDateTime created_date;
-
-    @Schema(description = "date this user was updated", example = "2023-03-18T00:23:42")
-    @LastModifiedDate
-    private LocalDateTime updated_date;
-
-    // @OneToMany(mappedBy = "user")
-    // private List<Topic> topic
 }
