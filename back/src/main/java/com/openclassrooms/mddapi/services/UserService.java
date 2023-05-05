@@ -23,7 +23,7 @@ public class UserService {
 
         User usr = user.get();
         UserResponse userResp = new UserResponse();
-        userResp.setId(usr.getUser_id());
+        userResp.setId(usr.getId());
         userResp.setUsername(usr.getUsername());
         userResp.setEmail(usr.getEmail());
         userResp.setCreated_date(usr.getCreated_date());
