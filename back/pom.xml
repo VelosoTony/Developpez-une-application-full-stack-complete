@@ -15,9 +15,15 @@
 	<name>mdd-api</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -25,12 +31,9 @@
 			<version>2.1.0</version>
 		</dependency>
 
-
 		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-extensions</artifactId>
-			<version>0.11.5</version>
-			<type>pom</type>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 		<dependency>
