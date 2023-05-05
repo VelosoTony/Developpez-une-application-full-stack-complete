@@ -5,6 +5,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -21,8 +22,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data // annotation Lombok qui évite d'ajouter les getters et setters.
+// annotation Lombok qui évite d'ajouter les getters et setters.
 @Builder
+@Data
 @Entity // annotation qui indique que la classe correspond à une table de la BD.
 @Table(name = "users") // indique le nom de la table associée
 @AllArgsConstructor
@@ -32,8 +34,9 @@ public class User {
 
     @Schema(description = "User identifier", example = "1")
     @Id // clé primaire de la table
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id est auto-incrémenté
-    private Integer user_id;
+    private Long id;
 
     @Schema(description = "Username", example = "Robert")
     private String username;

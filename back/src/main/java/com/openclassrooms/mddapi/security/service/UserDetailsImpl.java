@@ -23,17 +23,13 @@ public class UserDetailsImpl implements UserDetails {
 
   private String username;
 
-  private String firstName;
-
-  private String lastName;
-
-  private Boolean admin;
+  private String email;
 
   @JsonIgnore
   private String password;
 
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return new HashSet<GrantedAuthority>();
+    return new HashSet<>();
   }
 
   @Override
@@ -56,13 +52,13 @@ public class UserDetailsImpl implements UserDetails {
     return true;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (o == null || getClass() != o.getClass())
-      return false;
-    UserDetailsImpl user = (UserDetailsImpl) o;
-    return Objects.equals(id, user.id);
-  }
+  // @Override
+  // public boolean equals(Object o) {
+  // if (this == o)
+  // return true;
+  // if (o == null || getClass() != o.getClass())
+  // return false;
+  // UserDetailsImpl user = (UserDetailsImpl) o;
+  // return Objects.equals(id, user.id);
+  // }
 }

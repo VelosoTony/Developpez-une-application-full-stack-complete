@@ -66,7 +66,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests()
                 // Authorize access to register and login
-                .requestMatchers(HttpMethod.POST, "/api/auth/register", "/api/auth/login")
+                .requestMatchers(HttpMethod.POST, "/auth/register", "/auth/login")
                 .permitAll()
                 // Authorize access to swagger documentation, response status error, upload
                 // folder for images

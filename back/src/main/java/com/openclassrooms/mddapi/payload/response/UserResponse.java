@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class UserResponse {
 
     @Schema(description = "User identifier", example = "1")
-    private Integer id;
+    private Long id;
     @Schema(description = "User name", example = "Robert")
     private String username;
     @Schema(description = "User email", example = "Robert@mail.com")
