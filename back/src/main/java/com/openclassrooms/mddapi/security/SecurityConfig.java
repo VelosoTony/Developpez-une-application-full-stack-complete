@@ -59,6 +59,7 @@ public class SecurityConfig {
 
         http
                 // disable Cross-Site Request Forgery
+                .cors().and()
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthEntryPoint).and()
                 // Spring Security will never create an HttpSession and it will never use it to
@@ -66,7 +67,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests()
                 // Authorize access to register and login
-                .requestMatchers(HttpMethod.POST, "/auth/register", "/auth/login")
+                .requestMatchers(HttpMethod.POST, "/api/auth/**")
                 .permitAll()
                 // Authorize access to swagger documentation, response status error, upload
                 // folder for images

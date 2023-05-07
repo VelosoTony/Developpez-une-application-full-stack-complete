@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,8 +25,9 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 
 import jakarta.validation.Valid;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("api/auth")
 @Tag(name = "Authentication")
 public class JwtAuthenticationController {
 

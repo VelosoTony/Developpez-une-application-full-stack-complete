@@ -1,15 +1,13 @@
 <div class="center">
   <img src="/assets/logo_p6.png" alt="logo" />
-  <h1>Welcome to MDD</h1>
-  <div class="items mt2" fxLayout="row wrap" fxLayout.lt-md="column">
-    <mat-card class="item" *ngFor="let topic of topics$ | async" fxFlex>
-      <mat-card-header>
-        <mat-card-title>{{ topic.name }}</mat-card-title>
-        <mat-card-subtitle>
-          Description {{ topic.description }}
-        </mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
+  <div
+    style="display: inline-flex; justify-content: space-between; width: 300px"
+  >
+    <div>
+      <a routerLink="/login">Se connecter</a>
+    </div>
+    <div>
+      <a routerLink="/register">S'inscrire</a>
+    </div>
   </div>
-  <button mat-raised-button color="primary" (click)="start()">Commencer</button>
 </div>
