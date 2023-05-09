@@ -4,14 +4,34 @@ import { HomeComponent } from './pages/home/home.component';
 import { TopicsComponent } from './pages/topics/topics.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { PostsComponent } from './pages/posts/posts.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 // consider a guard combined with canLoad / canActivate route option
 // to manage unauthenticated user to access private routes
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'topics', component: TopicsComponent },
+  {
+    path: '',
+    component: HomeComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
+  {
+    path: 'topics',
+    canActivate: [AuthGuard],
+    component: TopicsComponent,
+  },
+  {
+    path: 'posts',
+    canActivate: [AuthGuard],
+    component: PostsComponent,
+  },
 ];
 
 @NgModule({

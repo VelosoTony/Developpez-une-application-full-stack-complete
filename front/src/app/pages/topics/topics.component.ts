@@ -1,3 +1,4 @@
+import { SessionService } from 'src/app/core/services/session.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Topic } from 'src/app/core/interfaces/topic.interface';

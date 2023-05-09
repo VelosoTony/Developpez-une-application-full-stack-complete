@@ -1,10 +1,11 @@
+import { LoginService } from './../../core/services/login.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginRequest } from 'src/app/core/interfaces/loginRequest.interface';
-import { SessionInformation } from 'src/app/core/interfaces/sessionInformation.interface';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { LoginRequest } from 'src/app/core/interfaces/request/loginRequest.interface';
+import { LoginResponse } from 'src/app/core/interfaces/response/loginResponse.interface';
 import { SessionService } from 'src/app/core/services/session.service';
+import { emailValidator } from 'src/app/core/validators/email.validator';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
-    private authService: AuthService,
+    private loginService: LoginService,
     private fb: FormBuilder,
     private router: Router,
     private sessionService: SessionService
@@ -31,8 +32,8 @@ export class LoginComponent implements OnInit {
 
   public submit(): void {
     const loginRequest = this.form.value as LoginRequest;
-    this.authService.login(loginRequest).subscribe({
-      next: (response: SessionInformation) => {
+    this.loginService.login(loginRequest).subscribe({
+      next: (response: LoginResponse) => {
         this.sessionService.logIn(response);
         this.router.navigate(['/topics']);
       },

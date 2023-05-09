@@ -11,12 +11,11 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor(private sessionService: SessionService) {}
 
   public intercept(request: HttpRequest<any>, next: HttpHandler) {
-    if (this.sessionService.isLogged) {
+    if (this.sessionService.isValid()) {
+      const token = this.sessionService.getToken();
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${
-            this.sessionService.sessionInformation!.token
-          }`,
+          Authorization: `Bearer ${token}`,
         },
       });
     }
