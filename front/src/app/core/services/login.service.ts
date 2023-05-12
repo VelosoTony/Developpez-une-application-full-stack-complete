@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginRequest } from '../interfaces/request/loginRequest.interface';
-import { SessionInformation } from '../interfaces/sessionInformation.interface';
 import { LoginResponse } from '../interfaces/response/loginResponse.interface';
 
 @Injectable({

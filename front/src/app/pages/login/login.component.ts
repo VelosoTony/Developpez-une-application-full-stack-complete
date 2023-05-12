@@ -1,18 +1,17 @@
 import { LoginService } from './../../core/services/login.service';
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginRequest } from 'src/app/core/interfaces/request/loginRequest.interface';
 import { LoginResponse } from 'src/app/core/interfaces/response/loginResponse.interface';
 import { SessionService } from 'src/app/core/services/session.service';
-import { emailValidator } from 'src/app/core/validators/email.validator';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   public hide = true;
   public onError = false;
 
@@ -27,8 +26,6 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private sessionService: SessionService
   ) {}
-
-  ngOnInit(): void {}
 
   public submit(): void {
     const loginRequest = this.form.value as LoginRequest;
