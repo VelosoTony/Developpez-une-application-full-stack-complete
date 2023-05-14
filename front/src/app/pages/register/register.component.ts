@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RegisterRequest } from 'src/app/core/interfaces/request/registerRequest.interface';
 import { RegisterService } from 'src/app/core/services/register.service';
 import { SessionService } from 'src/app/core/services/session.service';
+import { passwordValidator } from 'src/app/core/validators/password.validator';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,8 @@ export class RegisterComponent {
 
   public form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.min(3)]],
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required, passwordValidator()]],
   });
 
   constructor(
