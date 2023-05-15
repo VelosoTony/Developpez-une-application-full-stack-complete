@@ -3,10 +3,12 @@
   <mat-grid-tile *ngFor="let topic of topics$ | async">
     <mat-card style="background-color: whitesmoke">
       <mat-card-header>
-        <h2>{{ topic.name }}</h2>
+        <mat-card-title>
+          <span>{{ topic.name }}</span>
+        </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p>{{ topic.description }}</p>
+        <span>{{ topic.description }}</span>
       </mat-card-content>
       <mat-card-footer>
         <div style="text-align: center">

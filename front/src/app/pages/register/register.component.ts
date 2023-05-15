@@ -8,6 +8,7 @@ import { LoginResponse } from 'src/app/core/interfaces/response/loginResponse.in
 import { RegisterService } from 'src/app/core/services/register.service';
 import { SessionService } from 'src/app/core/services/session.service';
 import { emailValidator } from 'src/app/core/validators/email.validator';
+import { passwordValidator } from 'src/app/core/validators/password.validator';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit {
 
   public form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.min(3)]],
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required, passwordValidator()]],
   });
 
   constructor(
