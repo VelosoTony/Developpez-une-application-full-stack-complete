@@ -1,6 +1,5 @@
-import { SessionService } from './../../core/services/session.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, filter, map } from 'rxjs';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Topic } from 'src/app/core/interfaces/topic.interface';
 import { TopicService } from 'src/app/core/services/topic.service';
 

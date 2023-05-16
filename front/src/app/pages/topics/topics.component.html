@@ -1,6 +1,8 @@
 <app-header></app-header>
-<mat-grid-list cols="2" rowHeight="250px">
-  <mat-grid-tile *ngFor="let topic of topics$ | async">
-    <app-topic-item [topic]="topic"></app-topic-item>
-  </mat-grid-tile>
-</mat-grid-list>
+<div class="container">
+  <mat-grid-list cols="2" rowHeight="250px" class="grid-list">
+    <mat-grid-tile *ngFor="let topic of topics$ | async">
+      <app-topic-item [topic]="topic"></app-topic-item>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
