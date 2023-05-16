@@ -1,6 +1,6 @@
-import { SessionService } from 'src/app/core/services/session.service';
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { SessionService } from './../../core/services/session.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, filter, map } from 'rxjs';
 import { Topic } from 'src/app/core/interfaces/topic.interface';
 import { TopicService } from 'src/app/core/services/topic.service';
 
@@ -9,14 +9,10 @@ import { TopicService } from 'src/app/core/services/topic.service';
   templateUrl: './topics.component.html',
   styleUrls: ['./topics.component.scss'],
 })
-export class TopicsComponent implements OnInit {
-  public topics$: Observable<Topic[]> = this.topicService.all();
+export class TopicsComponent {
+  public topics$!: Observable<Topic[]>;
 
-  constructor(private topicService: TopicService) {}
-
-  ngOnInit(): void {}
-
-  public followTopic(): void {}
-
-  public unfollowTopic(): void {}
+  constructor(private topicService: TopicService) {
+    this.topics$ = this.topicService.all();
+  }
 }

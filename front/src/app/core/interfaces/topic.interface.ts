@@ -1,3 +1,5 @@
+import { User } from './user.interface';
+
 /*
 example of topic:
 {

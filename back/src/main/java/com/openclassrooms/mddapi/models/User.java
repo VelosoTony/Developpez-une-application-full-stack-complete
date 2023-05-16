@@ -4,16 +4,10 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -36,7 +30,8 @@ public class User {
     @Id // clé primaire de la table
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id est auto-incrémenté
-    private Long id;
+
+    private Integer id;
 
     @Schema(description = "Username", example = "Robert")
     private String username;
@@ -55,13 +50,10 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updated_date;
 
-    @OneToMany(mappedBy = "user")
-    private List<Subscription> subscriptions;
-
-    @OneToMany(mappedBy = "user")
-    private List<Comment> comments;
-
-    @OneToMany(mappedBy = "user")
-    private List<Post> posts;
+    @Schema(description = "List of subscribed topics ", example = "List<Topic>")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "subscribe", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "topic_id"))
+    @JsonIgnore
+    private List<Topic> topics;
 
 }

@@ -21,6 +21,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { PostsComponent } from './pages/posts/posts.component';
+import { TopicItemComponent } from './core/components/topic-item/topic-item.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const materialModule = [
   MatButtonModule,
@@ -41,6 +43,8 @@ const materialModule = [
     TopicsComponent,
     HeaderComponent,
     PostsComponent,
+    TopicItemComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

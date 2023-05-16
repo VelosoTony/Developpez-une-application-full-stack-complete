@@ -7,12 +7,26 @@ import { Topic } from '../interfaces/topic.interface';
   providedIn: 'root',
 })
 export class TopicService {
-  // private pathService = './assets/mock/topics.json';
   private pathService = 'api/topics';
 
   constructor(private httpClient: HttpClient) {}
 
   public all(): Observable<Topic[]> {
     return this.httpClient.get<Topic[]>(this.pathService);
+  }
+
+  public subscribe(id: string): Observable<void> {
+    console.log(`POST ${this.pathService}/${id}/subscribe`);
+    return this.httpClient.post<void>(
+      `${this.pathService}/${id}/subscribe`,
+      null
+    );
+  }
+
+  public unsubscribe(id: string): Observable<void> {
+    console.log(`DELETE ${this.pathService}/${id}/unsubscribe`);
+    return this.httpClient.delete<void>(
+      `${this.pathService}/${id}/unsubscribe`
+    );
   }
 }

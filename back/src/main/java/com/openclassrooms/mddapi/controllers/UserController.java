@@ -1,5 +1,7 @@
 package com.openclassrooms.mddapi.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.openclassrooms.mddapi.models.Topic;
+import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.payload.response.UserResponse;
 import com.openclassrooms.mddapi.services.UserService;
 
@@ -27,14 +31,36 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/user/{id}")
-	@Operation(summary = "Get user by id", description = "Retrieve account information about user specified by his id")
+	@GetMapping("/user/{email}")
+	@Operation(summary = "Get user by email", description = "Retrieve account information about user specified by his email")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
 			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
-	public ResponseEntity<UserResponse> getUserById(@PathVariable Integer id) {
+	public ResponseEntity<UserResponse> getUserByEmail(@PathVariable String email) {
 
-		return ResponseEntity.ok(userService.getUserById(id));
+		return ResponseEntity.ok(userService.getUserByEmail(email));
+
+	}
+
+	@GetMapping("/users")
+	@Operation(summary = "Get all user", description = "Retrieve account information about all users")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
+			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
+	public ResponseEntity<Iterable<User>> getUsers() {
+
+		return ResponseEntity.ok(userService.getUsers());
+
+	}
+
+	@GetMapping("/user/subscription")
+	@Operation(summary = "Get all user", description = "Retrieve account information about all users")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
+			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
+	public ResponseEntity<List<Topic>> getUserSubscription() {
+
+		return ResponseEntity.ok(userService.getUserSubscription());
 
 	}
 

@@ -1,0 +1,21 @@
+<mat-card style="background-color: whitesmoke">
+  <mat-card-header>
+    <mat-card-title>
+      <span>{{ topic.name }}</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <span>{{ topic.description }}</span>
+  </mat-card-content>
+  <mat-card-footer>
+    <div style="text-align: center">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="subscribe(topic.topic_id.toString())"
+      >
+        <span>{{ buttonText }}</span>
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>
