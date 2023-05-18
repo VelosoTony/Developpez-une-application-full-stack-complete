@@ -23,6 +23,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { PostsComponent } from './pages/posts/posts.component';
 import { TopicListItemComponent } from './core/components/topic-list-item/topic-list-item.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { TopicsComponent } from './pages/topics/topics.component';
 
 const materialModule = [
   MatButtonModule,
@@ -45,6 +46,7 @@ const materialModule = [
     PostsComponent,
     TopicListItemComponent,
     ProfileComponent,
+    TopicsComponent,
   ],
   imports: [
     BrowserModule,

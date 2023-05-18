@@ -5,7 +5,7 @@ import { Topic } from 'src/app/core/interfaces/topic.interface';
 import { TopicService } from 'src/app/core/services/topic.service';
 
 @Component({
-  selector: 'app-topics',
+  selector: 'app-topic-list',
   templateUrl: './topic-list.component.html',
   styleUrls: ['./topic-list.component.scss'],
 })

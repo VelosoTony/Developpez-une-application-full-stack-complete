@@ -2,9 +2,23 @@
   <img src="/assets/logo_p6.png" alt="logo" class="logo" />
   <span class="spacer"></span>
   <div *ngIf="isLogged$ | async">
-    <span (click)="navToPost()" class="link">Articles</span>
-    <span (click)="navToTopic()" class="link">Thèmes</span>
-    <span (click)="navToProfile()" class="link">
+    <span
+      (click)="navToPost()"
+      class="link"
+      [ngClass]="{ active: page === '/posts' }"
+      >Articles</span
+    >
+    <span
+      (click)="navToTopic()"
+      class="link"
+      [ngClass]="{ active: page === '/topics' }"
+      >Thèmes</span
+    >
+    <span
+      (click)="navToProfile()"
+      class="link"
+      [ngClass]="{ active: page === '/profile' }"
+    >
       <mat-icon class="icon">account_circle</mat-icon>
     </span>
   </div>
