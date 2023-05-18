@@ -21,8 +21,9 @@ public class Topic {
 
     @Schema(description = "Topic identifier", example = "1")
     @Id // clé primaire de la table
+    @Column(name = "topic_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id est auto-incrémenté
-    private Integer topic_id;
+    private Integer id;
 
     @Schema(description = "Name", example = "Java")
     private String name;

@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div class="container">
+  <form *ngIf="user !== undefined" [formGroup]="userForm" (submit)="onSubmit()">
+    <div class="center">
+      <div><h1>Profil utilisateur</h1></div>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Nom d'utilisateur</mat-label>
+        <input matInput formControlName="username" id="email" type="text" />
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Adresse email</mat-label>
+        <input matInput formControlName="email" id="email" type="text" />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" [disabled]="userForm.invalid">
+        Sauvegarder
+      </button>
+
+      <div class="text-center">
+        <button mat-button color="warn" (click)="logout()">
+          Se déconnecter
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <hr />
+  <div class="center"><h1>Abonnements</h1></div>
+  <app-topics [onProfile]="true"></app-topics>
+</div>

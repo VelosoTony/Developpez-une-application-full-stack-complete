@@ -10,11 +10,20 @@
   <mat-card-footer>
     <div style="text-align: center">
       <button
+        *ngIf="!onProfile"
         mat-raised-button
         color="primary"
-        (click)="subscribe(topic.topic_id.toString())"
+        (click)="subscribe(topic.id.toString())"
       >
-        <span>{{ buttonText }}</span>
+        <span>S'abonner</span>
+      </button>
+      <button
+        *ngIf="onProfile"
+        mat-raised-button
+        color="primary"
+        (click)="unsubscribe(topic.id.toString())"
+      >
+        <span>Se désabonner</span>
       </button>
     </div>
   </mat-card-footer>

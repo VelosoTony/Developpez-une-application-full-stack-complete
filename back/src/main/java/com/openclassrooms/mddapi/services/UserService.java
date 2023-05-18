@@ -45,6 +45,19 @@ public class UserService {
 
     }
 
+    public User getUser() {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        Optional<User> user = userRepository.findByEmail(userDetails.getEmail());
+        User usr = user.get();
+        return usr;
+
+    }
+
+    public User updateUser(User user) {
+        return this.userRepository.save(user);
+    }
+
     public Iterable<User> getUsers() {
         return userRepository.findAll();
     }
@@ -69,7 +82,7 @@ public class UserService {
             throw new NotFoundException();
         }
 
-        boolean alreadySubscribe = user.getTopics().stream().anyMatch(o -> o.getTopic_id().equals(topic_id));
+        boolean alreadySubscribe = user.getTopics().stream().anyMatch(o -> o.getId().equals(topic_id));
         if (alreadySubscribe) {
             throw new BadRequestException();
         }
@@ -89,13 +102,13 @@ public class UserService {
             throw new NotFoundException();
         }
 
-        boolean alreadySubscribe = user.getTopics().stream().anyMatch(o -> o.getTopic_id().equals(topic_id));
+        boolean alreadySubscribe = user.getTopics().stream().anyMatch(o -> o.getId().equals(topic_id));
         if (!alreadySubscribe) {
             throw new BadRequestException();
         }
 
         user.setTopics(
-                user.getTopics().stream().filter(topicList -> !topicList.getTopic_id().equals(topic_id))
+                user.getTopics().stream().filter(topicList -> !topicList.getId().equals(topic_id))
                         .collect(Collectors.toList()));
 
         this.userRepository.save(user);

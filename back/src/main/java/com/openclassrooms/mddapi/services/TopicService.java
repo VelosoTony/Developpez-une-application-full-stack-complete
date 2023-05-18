@@ -13,8 +13,19 @@ public class TopicService {
     @Autowired
     private TopicRepository topicRepository;
 
+    @Autowired
+    private UserService userService;
+
     public List<Topic> getAllTopics() {
         return this.topicRepository.findAll();
+    }
+
+    public List<Topic> getUnsubscribedTopics() {
+
+        Integer[] topicsId = userService.getUserSubscription().stream().map(Topic::getId).toArray(Integer[]::new);
+
+        return this.topicRepository.findByIdNotIn(topicsId);
+
     }
 
 }

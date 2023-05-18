@@ -39,7 +39,7 @@ public class TopicController {
 			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
 	public List<Topic> getTopics() {
 
-		return topicService.getAllTopics();
+		return topicService.getUnsubscribedTopics();
 
 	}
 

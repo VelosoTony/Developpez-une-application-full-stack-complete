@@ -1,4 +1,3 @@
-import { User } from './user.interface';
 
 /*
 example of topic:
@@ -9,7 +8,7 @@ example of topic:
 }
 */
 export interface Topic {
-  topic_id: number;
+  id: number;
   name: string;
   description: string;
 }

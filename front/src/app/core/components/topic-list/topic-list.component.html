@@ -1,0 +1,12 @@
+<div class="container">
+  <mat-grid-list cols="2" rowHeight="250px" class="grid-list">
+    <mat-grid-tile *ngFor="let topic of topics$ | async">
+      <app-topic-list-item
+        [topic]="topic"
+        [onProfile]="onProfile"
+        (topicUnsubscribed)="onTopicUnsubscribed($event)"
+        (topicSubscribed)="onTopicSubscribed($event)"
+      ></app-topic-list-item>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

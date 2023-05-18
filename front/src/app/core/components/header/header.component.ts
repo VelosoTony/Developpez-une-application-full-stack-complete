@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionService } from '../../services/session.service';
 import { Observable } from 'rxjs/internal/Observable';
@@ -14,8 +14,7 @@ export class HeaderComponent {
   constructor(private router: Router, private sessionService: SessionService) {}
 
   public navToProfile(): void {
-    this.sessionService.logOut();
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('profile');
   }
   public navToPost(): void {
     this.router.navigateByUrl('posts');
