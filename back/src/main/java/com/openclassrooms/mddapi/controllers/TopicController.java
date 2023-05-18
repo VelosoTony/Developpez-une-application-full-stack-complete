@@ -60,7 +60,7 @@ public class TopicController {
 			UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
 					.getPrincipal();
 
-			this.userService.subscribe(topic_id);
+			this.userService.subscribeTopic(topic_id);
 			System.out.println("Subscribe User[" + user.getId() + "] to Topic[" + topic_id + "]");
 			return ResponseEntity.ok().build();
 		} catch (NumberFormatException e) {
@@ -73,7 +73,7 @@ public class TopicController {
 		try {
 			UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
 					.getPrincipal();
-			this.userService.unsubscribe(topic_id);
+			this.userService.unsubscribeTopic(topic_id);
 			System.out.println("Unsubscribe User[" + user.getId() + "] from Topic[" + topic_id + "]");
 			return ResponseEntity.ok().build();
 		} catch (NumberFormatException e) {

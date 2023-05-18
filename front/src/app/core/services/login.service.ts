@@ -13,6 +13,7 @@ export class LoginService {
   constructor(private httpClient: HttpClient) {}
 
   public login(loginRequest: LoginRequest): Observable<LoginResponse> {
+    console.log('LOGIN ' + loginRequest);
     return this.httpClient.post<LoginResponse>(
       `${this.pathService}/login`,
       loginRequest

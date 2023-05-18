@@ -12,7 +12,6 @@ import { passwordValidator } from 'src/app/core/validators/password.validator';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  public hide = true;
   public onError = false;
 
   public form = this.fb.group({

@@ -24,4 +24,10 @@ export class UserService {
     const body = { username: username, email: email };
     return this.httpClient.put<User>(this.pathService, body);
   }
+
+  public updatePassword(password: string): Observable<User> {
+    const body = { password: password };
+    console.log('User.service updatePassword ' + body);
+    return this.httpClient.put<User>(this.pathService + '/password', body);
+  }
 }

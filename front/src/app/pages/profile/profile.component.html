@@ -3,27 +3,76 @@
   <form *ngIf="user !== undefined" [formGroup]="userForm" (submit)="onSubmit()">
     <div class="center">
       <div><h1>Profil utilisateur</h1></div>
-      <mat-form-field class="form-field" appearance="outline">
+      <mat-form-field appearance="outline">
         <mat-label>Nom d'utilisateur</mat-label>
-        <input matInput formControlName="username" id="email" type="text" />
+        <input matInput formControlName="username" id="username" type="text" />
       </mat-form-field>
-      <mat-form-field class="form-field" appearance="outline">
+      <mat-form-field appearance="outline">
         <mat-label>Adresse email</mat-label>
         <input matInput formControlName="email" id="email" type="text" />
+        <mat-error>Email incorrect</mat-error>
       </mat-form-field>
-
       <button mat-raised-button color="primary" [disabled]="userForm.invalid">
         Sauvegarder
       </button>
-
-      <div class="text-center">
-        <button mat-button color="warn" (click)="logout()">
-          Se déconnecter
-        </button>
+      <div *ngIf="submittedInfo && successInfoMessage">
+        {{ successInfoMessage }}
       </div>
     </div>
   </form>
+  <div class="center"></div>
+  <form
+    *ngIf="user !== undefined"
+    [formGroup]="passwordForm"
+    (submit)="onSubmitPassword()"
+  >
+    <div class="center">
+      <mat-form-field appearance="outline">
+        <mat-label>Mot de passe</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          placeholder="Nouveau mot de passe"
+          formControlName="newPassword"
+        />
+        <button mat-icon-button matSuffix (click)="hide = !hide"></button>
+        <mat-error>Mot de passe incorrect</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirmation mot de passe</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          placeholder="Confirmation mot de passe"
+          formControlName="confirmPassword"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <mat-error>Mot de passe différent</mat-error>
+      </mat-form-field>
 
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="passwordForm.invalid"
+      >
+        Modifier mot de passe
+      </button>
+      <div *ngIf="submittedPass && successPassMessage">
+        {{ successPassMessage }}
+      </div>
+    </div>
+  </form>
+  <div class="center">
+    <button mat-button color="warn" (click)="logout()">Se déconnecter</button>
+  </div>
   <hr />
   <div class="center"><h1>Abonnements</h1></div>
   <app-topic-list [onProfile]="true"></app-topic-list>

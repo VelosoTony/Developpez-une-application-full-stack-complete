@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.exception.BadRequestException;
@@ -21,11 +22,20 @@ import com.openclassrooms.mddapi.security.service.UserDetailsImpl;
 public class UserService {
 
     @Autowired
+    private PasswordEncoder bcryptEncoder;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private TopicRepository topicRepository;
 
+    /**
+     * * Retrieves User details from an email.
+     * 
+     * @param email representing the email of user to retrieve.
+     * @return UserResponse reprensenting the User retrieved.
+     */
     public UserResponse getUserByEmail(String email) {
 
         Optional<User> user = userRepository.findByEmail(email);
@@ -45,6 +55,11 @@ public class UserService {
 
     }
 
+    /**
+     * Retrieves the authenticated user details.
+     * 
+     * @return User object representing the authenticated user.
+     */
     public User getUser() {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
@@ -54,7 +69,29 @@ public class UserService {
 
     }
 
+    /**
+     * Update password for the authenticated user.
+     * 
+     * @param password string containing the new password.
+     * @return User object representing the updated user.
+     */
+    public User updatePassword(String password) {
+
+        User user = getUser();
+        user.setPassword(bcryptEncoder.encode(password));
+
+        System.out.println("Update Password for : " + user);
+        return this.userRepository.save(user);
+    }
+
+    /**
+     * Update the User details.
+     * 
+     * @param user object representing the new user details.
+     * @return User object representing the updated user.
+     */
     public User updateUser(User user) {
+
         return this.userRepository.save(user);
     }
 
@@ -62,18 +99,27 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    /**
+     * Retrieves topics list from the authenticated user.
+     * 
+     * @return List<Topic> representing the list of User subscriptions.
+     */
     public List<Topic> getUserSubscription() {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         Optional<User> user = userRepository.findByEmail(userDetails.getEmail());
-        System.out.println(userDetails.getId());
         User usr = user.get();
         List<Topic> subscriptions = usr.getTopics();
         return subscriptions;
 
     }
 
-    public void subscribe(Integer topic_id) {
+    /**
+     * Add Topic to subscription list of authenticated user.
+     * 
+     * @param topic_id representing the id of the topic to subscribe.
+     */
+    public void subscribeTopic(Integer topic_id) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         Topic topic = this.topicRepository.findById(topic_id).orElse(null);
@@ -93,7 +139,12 @@ public class UserService {
 
     }
 
-    public void unsubscribe(Integer topic_id) {
+    /**
+     * Remove Topic to subscription list of authenticated user.
+     * 
+     * @param topic_id representing the id of the topic to unsubscribe.
+     */
+    public void unsubscribeTopic(Integer topic_id) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         Topic topic = this.topicRepository.findById(topic_id).orElse(null);

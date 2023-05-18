@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.models.User;
+import com.openclassrooms.mddapi.payload.request.PasswordRequest;
 import com.openclassrooms.mddapi.payload.request.UserRequest;
 import com.openclassrooms.mddapi.payload.response.UserResponse;
 import com.openclassrooms.mddapi.services.UserService;
@@ -57,7 +58,18 @@ public class UserController {
 		user.setUsername(userRequest.getUsername());
 		user = userService.updateUser(user);
 		return ResponseEntity.ok(user);
+	}
 
+	@PutMapping(value = "/user/password", produces = "application/json", consumes = "application/json")
+	@Operation(summary = "Update user password", description = "Update password")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
+			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
+	public ResponseEntity<User> updatePassword(@RequestBody PasswordRequest passwordRequest) {
+
+		String password = passwordRequest.getPassword();
+
+		return ResponseEntity.ok(userService.updatePassword(password));
 	}
 
 	@GetMapping("/user/{email}")
