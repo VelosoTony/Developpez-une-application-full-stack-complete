@@ -52,8 +52,8 @@ public class UserService {
         userResp.setId(usr.getId());
         userResp.setUsername(usr.getUsername());
         userResp.setEmail(usr.getEmail());
-        userResp.setCreated_date(usr.getCreated_date());
-        userResp.setUpdated_date(usr.getUpdated_date());
+        userResp.setCreated_date(usr.getCreatedDate());
+        userResp.setUpdated_date(usr.getUpdatedDate());
         System.out.println(usr.getTopics());
         userResp.setTopics(usr.getTopics());
         System.out.println(userResp);

@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +33,8 @@ public class Comment {
     @Schema(description = "Comment identifier", example = "1")
     @Id // clé primaire de la table
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id est auto-incrémenté
-    private Integer comment_id;
+    @Column(name = "comment_id")
+    private Integer id;
 
     @Schema(description = "Post identifier", example = "1")
     @ManyToOne
@@ -49,5 +51,6 @@ public class Comment {
 
     @Schema(description = "date this user was created", example = "2023-03-18T00:23:42")
     @CreatedDate
-    private LocalDateTime created_date;
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
 }

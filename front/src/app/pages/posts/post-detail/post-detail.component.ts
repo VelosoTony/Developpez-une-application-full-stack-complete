@@ -26,6 +26,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     this.postSub = this.post$.subscribe({
       next: (post: Post) => {
         this.post = post;
+        console.log(post);
       },
       error: (_error: any) => (this.onError = true),
     });

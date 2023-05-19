@@ -12,7 +12,12 @@
   <mat-card-content>
     <span *ngIf="!onDetail">{{ post.content }}</span>
     <span *ngIf="onDetail">{{ post.content | slice : 0 : 255 }}...</span>
-    <button *ngIf="onDetail" mat-button color="primary" (click)="showDetail()">
+    <button
+      *ngIf="onDetail"
+      mat-button
+      color="primary"
+      (click)="showDetail(post.id)"
+    >
       <span>+détail</span>
     </button>
   </mat-card-content>

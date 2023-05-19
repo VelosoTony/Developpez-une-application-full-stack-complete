@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../../interfaces/post.interface';
 
 @Component({
@@ -12,10 +12,9 @@ export class PostListItemComponent {
   public posts!: Post[];
   @Input() onDetail!: boolean;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
-  public showDetail(): void {
-    console.log('Show Detail');
-    this.router.navigateByUrl('/post-detail/' + this.post.post_id);
+  public showDetail(id: number): void {
+    this.router.navigateByUrl('/post-detail/' + id);
   }
 }

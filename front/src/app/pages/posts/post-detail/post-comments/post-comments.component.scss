@@ -1,8 +1,13 @@
-.container {
-  height: calc(100vh - 64px);
-  overflow: auto;
+.comment-card {
+  display: flex;
+  align-items: flex-end;
+  min-height: auto;
+  background-color: #f1f1f1;
 }
 
+.mat-form-field-outline {
+  color: red; /* Change the outline color to red */
+}
 .icon {
   transform: scale(2);
 }

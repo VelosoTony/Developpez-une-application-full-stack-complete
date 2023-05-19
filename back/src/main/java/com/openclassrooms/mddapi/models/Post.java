@@ -25,7 +25,8 @@ public class Post {
     @Schema(description = "Post identifier", example = "1")
     @Id // clé primaire de la table
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id est auto-incrémenté
-    private Integer post_id;
+    @Column(name = "post_id")
+    private Integer id;
 
     @Schema(description = "Topic identifier", example = "1")
     @ManyToOne

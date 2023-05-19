@@ -6,9 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.models.Post;
 import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.models.User;
+import com.openclassrooms.mddapi.payload.request.CommentCreateRequest;
 import com.openclassrooms.mddapi.payload.request.PostCreateRequest;
 import com.openclassrooms.mddapi.payload.response.TopicListResponse;
 import com.openclassrooms.mddapi.security.service.UserDetailsImpl;
@@ -56,6 +58,25 @@ public class PostController {
     public Post getPostById(@PathVariable("id") Integer id) {
 
         return postService.getPostById(id);
+    }
+
+    @GetMapping("/{id}/comments")
+    @Operation(summary = "Get post by id", description = "Retrieve information of specified post")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TopicListResponse.class))),
+            @ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
+    public List<Comment> getCommentsPostById(@PathVariable("id") Integer id) {
+
+        return postService.getCommentsPostById(id);
+    }
+
+    @PostMapping("/{id}/comments")
+    public Comment addPostComment(@PathVariable("id") Integer id,
+            @RequestBody CommentCreateRequest commentRequest) {
+
+        System.out.println(commentRequest);
+
+        return this.postService.addPostComment(id, commentRequest.getContent());
     }
 
     @PostMapping("")

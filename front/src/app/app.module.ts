@@ -29,7 +29,7 @@ import { PostListComponent } from './core/components/post-list/post-list.compone
 import { PostListItemComponent } from './core/components/post-list-item/post-list-item.component';
 import { PostFormComponent } from './pages/posts/post-form/post-form.component';
 import { PostDetailComponent } from './pages/posts/post-detail/post-detail.component';
-import { CommentsComponent } from './pages/posts/post-detail/comments/comments.component';
+import { PostCommentsComponent } from './pages/posts/post-detail/post-comments/post-comments.component';
 
 const materialModule = [
   MatButtonModule,
@@ -58,7 +58,7 @@ const materialModule = [
     PostListItemComponent,
     PostFormComponent,
     PostDetailComponent,
-    CommentsComponent,
+    PostCommentsComponent,
   ],
   imports: [
     BrowserModule,

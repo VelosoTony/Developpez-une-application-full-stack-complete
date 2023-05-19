@@ -44,11 +44,13 @@ public class User {
 
     @Schema(description = "date this user was created", example = "2023-03-18T00:23:42")
     @CreatedDate
-    private LocalDateTime created_date;
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
 
     @Schema(description = "date this user was updated", example = "2023-03-18T00:23:42")
     @LastModifiedDate
-    private LocalDateTime updated_date;
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
 
     @Schema(description = "List of subscribed topics ", example = "List<Topic>")
     @ManyToMany(fetch = FetchType.EAGER)
