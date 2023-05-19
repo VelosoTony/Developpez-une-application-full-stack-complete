@@ -1,0 +1,52 @@
+<app-header></app-header>
+<button mat-icon-button routerLink="/posts">
+  <mat-icon class="icon">arrow_back</mat-icon>
+</button>
+<div class="container">
+  <mat-card>
+    <mat-card-header class="center">
+      <mat-card-title>Créer un nouvel article</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="center">
+        <mat-form-field appearance="outline">
+          <mat-label>Sélectionner un thème</mat-label>
+          <mat-select formControlName="topicId">
+            <mat-option *ngFor="let topic of topics$ | async" [value]="topic.id"
+              >{{ topic.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Titre</mat-label>
+          <input
+            matInput
+            placeholder="Titre de l'article"
+            formControlName="title"
+          />
+          <mat-error>Titre incorrect</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Contenu</mat-label>
+          <input
+            matInput
+            placeholder="Contenu de l'article"
+            formControlName="content"
+          />
+          <mat-error>Contenu nécessaire</mat-error>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="form.invalid"
+        >
+          Créer
+        </button>
+        <p *ngIf="onError" class="error">
+          Erreur lors de la création de l'article.
+        </p>
+      </div>
+    </form>
+  </mat-card>
+</div>

@@ -43,8 +43,9 @@ public class Post {
     @Schema(description = "Content", example = "Lot of new features for this new version of Java.")
     private String content;
 
-    @Schema(description = "date this user was created", example = "2023-03-18T00:23:42")
+    @Schema(description = "date this Post was created", example = "2023-03-18T00:23:42")
     @CreatedDate
-    private LocalDateTime created_date;
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
 
 }

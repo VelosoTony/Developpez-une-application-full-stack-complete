@@ -30,6 +30,12 @@ public class UserService {
     @Autowired
     private TopicRepository topicRepository;
 
+    public User getUserById(Integer id) {
+        Optional<User> user = userRepository.findById(id);
+        return user.get();
+
+    }
+
     /**
      * * Retrieves User details from an email.
      * 

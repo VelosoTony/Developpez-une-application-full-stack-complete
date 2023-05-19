@@ -1,0 +1,7 @@
+<div class="container">
+  <mat-grid-list cols="2" rowHeight="250px" class="grid-list">
+    <mat-grid-tile *ngFor="let post of posts$ | async">
+      <app-post-list-item [post]="post" [onDetail]="true"></app-post-list-item>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

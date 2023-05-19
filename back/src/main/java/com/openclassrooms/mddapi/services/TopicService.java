@@ -20,6 +20,10 @@ public class TopicService {
         return this.topicRepository.findAll();
     }
 
+    public Topic getTopicById(Integer id) {
+        return this.topicRepository.findById(id).get();
+    }
+
     public List<Topic> getUnsubscribedTopics() {
 
         Integer[] topicsId = userService.getUserSubscription().stream().map(Topic::getId).toArray(Integer[]::new);

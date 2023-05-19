@@ -19,11 +19,17 @@ import { MatInputModule } from '@angular/material/input';
 import { HeaderComponent } from './core/components/header/header.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { PostsComponent } from './pages/posts/posts.component';
 import { TopicListItemComponent } from './core/components/topic-list-item/topic-list-item.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TopicsComponent } from './pages/topics/topics.component';
+import { PostListComponent } from './core/components/post-list/post-list.component';
+import { PostListItemComponent } from './core/components/post-list-item/post-list-item.component';
+import { PostFormComponent } from './pages/posts/post-form/post-form.component';
+import { PostDetailComponent } from './pages/posts/post-detail/post-detail.component';
+import { CommentsComponent } from './pages/posts/post-detail/comments/comments.component';
 
 const materialModule = [
   MatButtonModule,
@@ -34,6 +40,7 @@ const materialModule = [
   MatInputModule,
   MatSidenavModule,
   MatToolbarModule,
+  MatSelectModule,
 ];
 @NgModule({
   declarations: [
@@ -47,6 +54,11 @@ const materialModule = [
     TopicListItemComponent,
     ProfileComponent,
     TopicsComponent,
+    PostListComponent,
+    PostListItemComponent,
+    PostFormComponent,
+    PostDetailComponent,
+    CommentsComponent,
   ],
   imports: [
     BrowserModule,
