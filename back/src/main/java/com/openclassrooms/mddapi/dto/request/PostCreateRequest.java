@@ -7,7 +7,7 @@ import lombok.Data;
  * Represents a request to create a new post.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @Data
 public class PostCreateRequest {

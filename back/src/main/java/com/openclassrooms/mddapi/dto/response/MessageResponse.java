@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
  * Represents a response containing a message string.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @Data
 @Builder

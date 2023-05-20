@@ -15,7 +15,7 @@ import lombok.AllArgsConstructor;
  * Represents a response containing a list of topics.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @Data
 @Builder

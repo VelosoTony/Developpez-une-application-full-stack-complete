@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * exception is thrown.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class NotFoundException extends RuntimeException {

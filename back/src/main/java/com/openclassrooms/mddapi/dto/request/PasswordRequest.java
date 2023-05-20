@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * Represents a request to update a user's password.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @Data
 @Builder

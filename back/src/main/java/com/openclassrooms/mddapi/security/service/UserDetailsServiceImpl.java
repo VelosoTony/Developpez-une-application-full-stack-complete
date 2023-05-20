@@ -23,7 +23,7 @@ import com.openclassrooms.mddapi.security.jwt.JwtTokenUtility;
  * Service class for user details management and authentication.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

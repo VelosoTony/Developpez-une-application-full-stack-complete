@@ -9,7 +9,7 @@ import java.util.List;
  * Repository interface for managing Topic entities.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 public interface TopicRepository extends JpaRepository<Topic, Integer> {
     /**

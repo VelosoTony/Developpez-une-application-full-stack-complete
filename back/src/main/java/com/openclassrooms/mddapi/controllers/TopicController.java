@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * It is a RESTful controller
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -42,7 +42,7 @@ public class TopicController {
 	/**
 	 * Retrieves information of all topics.
 	 *
-	 * @return List<Topic> The list of all topics.
+	 * @return Topic[] The list of all topics.
 	 */
 	@GetMapping("")
 	@Operation(summary = "Get list topics", description = "Retrieve information of all topics")
@@ -58,7 +58,7 @@ public class TopicController {
 	/**
 	 * Retrieves information of topics subscribed by authenticated user.
 	 *
-	 * @return List<Topic> The list of topics subscribed by user.
+	 * @return Topic[] The list of topics subscribed by user.
 	 */
 	@GetMapping("/subscribed")
 	@Operation(summary = "Get subscribed topics", description = "Retrieve information of all subscribed topics")
@@ -75,7 +75,7 @@ public class TopicController {
 	 * Subscribes the authenticated user to a specified topic.
 	 *
 	 * @param topic_id The ID of the topic to subscribe to.
-	 * @return ResponseEntity<?> The response entity.
+	 * @return ResponseEntity The response entity.
 	 */
 	@PostMapping("/{id}/subscribe")
 	@Operation(summary = "Subscribe to a topic", description = "Subscribes the authenticated user to a specified topic.")
@@ -100,7 +100,7 @@ public class TopicController {
 	 * Unsubscribes the authenticated user from a specified topic.
 	 *
 	 * @param topic_id The ID of the topic to unsubscribe from.
-	 * @return ResponseEntity<?> The response entity.
+	 * @return ResponseEntity The response entity.
 	 */
 	@DeleteMapping("/{id}/unsubscribe")
 	@Operation(summary = "Unsubscribe to a topic", description = "Unsubscribes the authenticated user to a specified topic.")

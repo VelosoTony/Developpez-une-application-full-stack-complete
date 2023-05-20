@@ -17,7 +17,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
  * Utility class for JWT token generation, parsing, and validation.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @Component
 public class JwtTokenUtility {

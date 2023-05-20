@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * Represents a response containing a JWT token for authentication.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @Data
 @Builder

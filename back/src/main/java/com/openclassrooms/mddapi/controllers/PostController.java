@@ -30,7 +30,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * It is a RESTful controller
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -50,7 +50,7 @@ public class PostController {
     /**
      * Retrieves information of all posts.
      *
-     * @return List<Post> The list of all posts.
+     * @return Post[] The list of all posts.
      */
     @GetMapping("")
     @Operation(summary = "Get all posts", description = "Retrieve information of all posts")
@@ -82,7 +82,7 @@ public class PostController {
      * Retrieves comments of a specified post by ID.
      *
      * @param id The ID of the post.
-     * @return List<Comment> The list of comments for the specified post.
+     * @return Comment[] The list of comments for the specified post.
      */
     @GetMapping("/{id}/comments")
     @Operation(summary = "Get comments for post by id", description = "Retrieve list of comments for specified post by id.")
@@ -120,7 +120,7 @@ public class PostController {
      *
      * @param postRequest The post create request containing the post title and
      *                    content.
-     * @return ResponseEntity<?> The response entity.
+     * @return ResponseEntity The response entity.
      */
     @PostMapping("")
     @Operation(summary = "Create a new post", description = "Create a new post for the authenticated user.")

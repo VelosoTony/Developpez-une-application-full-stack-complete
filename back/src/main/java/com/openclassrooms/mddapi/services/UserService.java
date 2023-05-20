@@ -22,7 +22,7 @@ import com.openclassrooms.mddapi.security.service.UserDetailsImpl;
  * Service class for managing users.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @Service // Spécialisation de @Component
 public class UserService {
@@ -37,7 +37,9 @@ public class UserService {
     private TopicRepository topicRepository;
 
     /**
-     * <p>getUserById.</p>
+     * <p>
+     * getUserById.
+     * </p>
      *
      * @param id a {@link java.lang.Integer} object
      * @return a {@link com.openclassrooms.mddapi.models.User} object
@@ -114,7 +116,9 @@ public class UserService {
     }
 
     /**
-     * <p>getUsers.</p>
+     * <p>
+     * getUsers.
+     * </p>
      *
      * @return a {@link java.lang.Iterable} object
      */

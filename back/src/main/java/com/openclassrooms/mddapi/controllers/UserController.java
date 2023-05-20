@@ -31,7 +31,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * It is a RESTful controller
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -132,12 +132,12 @@ public class UserController {
 	}
 
 	/**
-	 * <p>getUserSubscription.</p>
+	 * "Retrieve topics subscribed by authenticated user
 	 *
-	 * @return a {@link org.springframework.http.ResponseEntity} object
+	 * @return The ResponseEntity containing the list of topic subscribed by use.
 	 */
 	@GetMapping("/user/subscription")
-	@Operation(summary = "Get all user", description = "Retrieve account information about all users")
+	@Operation(summary = "Get all topic subscribed by user", description = "Retrieve topics subscribed by authenticated user")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
 			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })

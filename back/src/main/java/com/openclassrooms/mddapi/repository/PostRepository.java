@@ -12,7 +12,7 @@ import com.openclassrooms.mddapi.models.Post;
  * Repository interface for managing Post entities.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 public interface PostRepository extends JpaRepository<Post, Integer> {
     /**

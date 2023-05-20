@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * <p>SwaggerConfiguration class.</p>
+ * <p>
+ * SwaggerConfiguration class.
+ * </p>
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @Configuration
 //@formatter:off

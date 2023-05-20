@@ -16,7 +16,7 @@ import lombok.Getter;
  * user.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @Builder
 @AllArgsConstructor

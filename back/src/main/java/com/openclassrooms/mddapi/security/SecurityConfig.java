@@ -26,7 +26,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
  * Configuration class for Spring Security.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @Configuration
 @EnableWebSecurity
@@ -74,7 +74,7 @@ public class SecurityConfig {
      * @param authConfig the AuthenticationConfiguration instance
      * @return the AuthenticationManager bean
      * @throws java.lang.Exception if an error occurs while retrieving the
-     *                   AuthenticationManager
+     *                             AuthenticationManager
      */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {

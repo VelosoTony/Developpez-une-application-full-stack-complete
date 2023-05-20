@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
  * Model representing an user.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 // annotation Lombok qui évite d'ajouter les getters et setters.
 @Builder

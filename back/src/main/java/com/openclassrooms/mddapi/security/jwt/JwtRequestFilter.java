@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * A filter that intercepts incoming requests and processes JWT authentication.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {

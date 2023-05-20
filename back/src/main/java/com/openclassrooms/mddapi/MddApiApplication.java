@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * The main class to start the MddApi application.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @SpringBootApplication
 public class MddApiApplication {

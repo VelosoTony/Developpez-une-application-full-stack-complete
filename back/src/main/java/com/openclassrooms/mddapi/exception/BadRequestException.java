@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * exception is thrown.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class BadRequestException extends RuntimeException {

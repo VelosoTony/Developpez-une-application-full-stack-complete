@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * Handles unauthorized requests and sends an unauthorized response.
  *
  * @author Tony
- * @version $Id: $Id
+ * @version 1.0
  */
 @Component
 public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
