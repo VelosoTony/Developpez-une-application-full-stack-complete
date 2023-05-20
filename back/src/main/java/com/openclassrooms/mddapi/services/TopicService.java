@@ -9,6 +9,9 @@ import com.openclassrooms.mddapi.repository.TopicRepository;
 
 /**
  * Service class for managing topics.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Service // Spécialisation de @Component
 public class TopicService {

@@ -5,6 +5,9 @@ import lombok.Data;
 
 /**
  * Represents a login request.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Data
 public class LoginRequest {

@@ -29,6 +29,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 /**
  * Controller class providing CRUD operations for user.
  * It is a RESTful controller
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -128,6 +131,11 @@ public class UserController {
 
 	}
 
+	/**
+	 * <p>getUserSubscription.</p>
+	 *
+	 * @return a {@link org.springframework.http.ResponseEntity} object
+	 */
 	@GetMapping("/user/subscription")
 	@Operation(summary = "Get all user", description = "Retrieve account information about all users")
 	@ApiResponses(value = {

@@ -12,9 +12,11 @@ import com.openclassrooms.mddapi.repository.PostRepository;
 
 /**
  * Service class for managing posts and comments.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Service // Spécialisation de @Component
-
 public class PostService {
 
     @Autowired

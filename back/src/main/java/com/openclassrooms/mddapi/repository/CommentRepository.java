@@ -8,6 +8,9 @@ import com.openclassrooms.mddapi.models.Comment;
 
 /**
  * Repository interface for managing Comment entities.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
     /**

@@ -28,6 +28,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 /**
  * Controller class providing CRUD operations for posts and comments.
  * It is a RESTful controller
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -46,7 +49,7 @@ public class PostController {
 
     /**
      * Retrieves information of all posts.
-     * 
+     *
      * @return List<Post> The list of all posts.
      */
     @GetMapping("")
@@ -61,7 +64,7 @@ public class PostController {
 
     /**
      * Retrieves information of a specified post by id.
-     * 
+     *
      * @param id The ID of the post to retrieve.
      * @return Post The specified post.
      */
@@ -77,7 +80,7 @@ public class PostController {
 
     /**
      * Retrieves comments of a specified post by ID.
-     * 
+     *
      * @param id The ID of the post.
      * @return List<Comment> The list of comments for the specified post.
      */
@@ -93,7 +96,7 @@ public class PostController {
 
     /**
      * Adds a comment to a specified post.
-     * 
+     *
      * @param id             The ID of the post.
      * @param commentRequest The comment create request containing the comment
      *                       content.
@@ -114,7 +117,7 @@ public class PostController {
 
     /**
      * Creates a new post.
-     * 
+     *
      * @param postRequest The post create request containing the post title and
      *                    content.
      * @return ResponseEntity<?> The response entity.

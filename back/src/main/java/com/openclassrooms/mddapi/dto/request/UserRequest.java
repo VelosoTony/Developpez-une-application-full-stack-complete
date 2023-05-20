@@ -5,6 +5,9 @@ import lombok.Data;
 
 /**
  * Represents a request to update user information.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Data
 public class UserRequest {

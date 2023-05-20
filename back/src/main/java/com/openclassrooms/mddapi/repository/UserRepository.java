@@ -8,6 +8,9 @@ import com.openclassrooms.mddapi.models.User;
 
 /**
  * Repository interface for managing User entities.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 public interface UserRepository extends JpaRepository<User, Integer> {
     /**

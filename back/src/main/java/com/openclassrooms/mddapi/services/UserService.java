@@ -20,6 +20,9 @@ import com.openclassrooms.mddapi.security.service.UserDetailsImpl;
 
 /**
  * Service class for managing users.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Service // Spécialisation de @Component
 public class UserService {
@@ -33,6 +36,12 @@ public class UserService {
     @Autowired
     private TopicRepository topicRepository;
 
+    /**
+     * <p>getUserById.</p>
+     *
+     * @param id a {@link java.lang.Integer} object
+     * @return a {@link com.openclassrooms.mddapi.models.User} object
+     */
     public User getUserById(Integer id) {
         Optional<User> user = userRepository.findById(id);
         return user.get();
@@ -41,7 +50,7 @@ public class UserService {
 
     /**
      * * Retrieves User details from an email.
-     * 
+     *
      * @param email representing the email of user to retrieve.
      * @return UserResponse reprensenting the User retrieved.
      */
@@ -66,7 +75,7 @@ public class UserService {
 
     /**
      * Retrieves the authenticated user details.
-     * 
+     *
      * @return User object representing the authenticated user.
      */
     public User getUser() {
@@ -80,7 +89,7 @@ public class UserService {
 
     /**
      * Update password for the authenticated user.
-     * 
+     *
      * @param password string containing the new password.
      * @return User object representing the updated user.
      */
@@ -95,7 +104,7 @@ public class UserService {
 
     /**
      * Update the User details.
-     * 
+     *
      * @param user object representing the new user details.
      * @return User object representing the updated user.
      */
@@ -104,13 +113,18 @@ public class UserService {
         return this.userRepository.save(user);
     }
 
+    /**
+     * <p>getUsers.</p>
+     *
+     * @return a {@link java.lang.Iterable} object
+     */
     public Iterable<User> getUsers() {
         return userRepository.findAll();
     }
 
     /**
      * Retrieves topics list from the authenticated user.
-     * 
+     *
      * @return List<Topic> representing the list of User subscriptions.
      */
     public List<Topic> getUserSubscription() {
@@ -125,7 +139,7 @@ public class UserService {
 
     /**
      * Add Topic to subscription list of authenticated user.
-     * 
+     *
      * @param topic_id representing the id of the topic to subscribe.
      */
     public void subscribeTopic(Integer topic_id) {
@@ -150,7 +164,7 @@ public class UserService {
 
     /**
      * Remove Topic to subscription list of authenticated user.
-     * 
+     *
      * @param topic_id representing the id of the topic to unsubscribe.
      */
     public void unsubscribeTopic(Integer topic_id) {

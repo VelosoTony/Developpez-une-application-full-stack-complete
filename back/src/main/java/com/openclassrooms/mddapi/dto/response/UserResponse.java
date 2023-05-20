@@ -13,6 +13,9 @@ import lombok.NoArgsConstructor;
 
 /**
  * Represents a response containing user information.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Data
 @Builder

@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 
 /**
  * Represents a response containing a message string.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Data
 @Builder

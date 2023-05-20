@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 /**
  * Represents a response containing a JWT token for authentication.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Data
 @Builder

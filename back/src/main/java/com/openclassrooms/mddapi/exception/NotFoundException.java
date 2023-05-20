@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * to indicate
  * that the HTTP response status should be set to 404 (Not Found) when this
  * exception is thrown.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class NotFoundException extends RuntimeException {

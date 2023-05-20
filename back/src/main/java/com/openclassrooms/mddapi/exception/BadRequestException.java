@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * to indicate
  * that the HTTP response status should be set to 400 (Bad Request) when this
  * exception is thrown.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class BadRequestException extends RuntimeException {

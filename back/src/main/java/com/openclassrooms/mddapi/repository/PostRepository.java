@@ -10,13 +10,15 @@ import com.openclassrooms.mddapi.models.Post;
 
 /**
  * Repository interface for managing Post entities.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 public interface PostRepository extends JpaRepository<Post, Integer> {
     /**
-     * Retrieves all posts sorted by date in descending order.
+     * {@inheritDoc}
      *
-     * @param sortByDateDesc the sort object specifying the sorting order
-     * @return a list of posts sorted by date in descending order
+     * Retrieves all posts sorted by date in descending order.
      */
     List<Post> findAll(Sort sortByDateDesc);
 }

@@ -21,6 +21,9 @@ import com.openclassrooms.mddapi.security.jwt.JwtTokenUtility;
 
 /**
  * Service class for user details management and authentication.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -38,11 +41,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private AuthenticationManager authenticationManager;
 
 	/**
-	 * Retrieves a user's details by their email address.
+	 * {@inheritDoc}
 	 *
-	 * @param email the email address of the user
-	 * @return the UserDetails object representing the user
-	 * @throws UsernameNotFoundException if the user is not found
+	 * Retrieves a user's details by their email address.
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -63,7 +64,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	 *
 	 * @param authenticationRequest the login request containing email and password
 	 * @return the JWT response containing the generated token
-	 * @throws Exception if authentication fails
+	 * @throws java.lang.Exception if authentication fails
 	 */
 	public JwtResponse login(LoginRequest authenticationRequest) throws Exception {
 
@@ -93,7 +94,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	 *
 	 * @param user the register request containing user details
 	 * @return the JWT response containing the generated token
-	 * @throws Exception if user registration fails
+	 * @throws java.lang.Exception if user registration fails
 	 */
 	public JwtResponse register(RegisterRequest user) throws Exception {
 

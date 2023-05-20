@@ -23,6 +23,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 /**
  * Controller class providing CRUD operations for topics.
  * It is a RESTful controller
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -38,7 +41,7 @@ public class TopicController {
 
 	/**
 	 * Retrieves information of all topics.
-	 * 
+	 *
 	 * @return List<Topic> The list of all topics.
 	 */
 	@GetMapping("")
@@ -54,7 +57,7 @@ public class TopicController {
 
 	/**
 	 * Retrieves information of topics subscribed by authenticated user.
-	 * 
+	 *
 	 * @return List<Topic> The list of topics subscribed by user.
 	 */
 	@GetMapping("/subscribed")
@@ -70,9 +73,8 @@ public class TopicController {
 
 	/**
 	 * Subscribes the authenticated user to a specified topic.
-	 * 
+	 *
 	 * @param topic_id The ID of the topic to subscribe to.
-	 * 
 	 * @return ResponseEntity<?> The response entity.
 	 */
 	@PostMapping("/{id}/subscribe")
@@ -94,9 +96,9 @@ public class TopicController {
 	}
 
 	/**
-	 * 
+	 *
 	 * Unsubscribes the authenticated user from a specified topic.
-	 * 
+	 *
 	 * @param topic_id The ID of the topic to unsubscribe from.
 	 * @return ResponseEntity<?> The response entity.
 	 */

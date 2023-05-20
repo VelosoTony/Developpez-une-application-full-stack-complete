@@ -33,6 +33,9 @@ import jakarta.validation.Valid;
  * and @RequestMapping to specify the base path for the endpoints.
  * It is also annotated with @Tag to categorize it under "Authentication" in API
  * documentation.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -46,11 +49,11 @@ public class JwtAuthenticationController {
 
 	/**
 	 * Generates an authentication token based on the provided login request.
-	 * 
+	 *
 	 * @param authenticationRequest The login request containing email and password.
 	 * @return ResponseEntity<JwtResponse> The response entity containing the JWT
 	 *         response.
-	 * @throws Exception If an error occurs during the authentication process.
+	 * @throws java.lang.Exception If an error occurs during the authentication process.
 	 */
 	@PostMapping(value = "/login", produces = "application/json", consumes = "application/json")
 	@Operation(summary = "Authentication", description = "Authentication with email and password, return JWT")
@@ -67,12 +70,12 @@ public class JwtAuthenticationController {
 
 	/**
 	 * Registers a new user based on the provided registration request.
-	 * 
+	 *
 	 * @param user The registration request containing email, username, and
 	 *             password.
 	 * @return ResponseEntity<JwtResponse> The response entity containing the JWT
 	 *         response.
-	 * @throws Exception If an error occurs during the registration process.
+	 * @throws java.lang.Exception If an error occurs during the registration process.
 	 */
 	@PostMapping(value = "/register", produces = "application/json", consumes = "application/json")
 	@Operation(summary = "Registration", description = "Register new user with email, username and password, return JWT")

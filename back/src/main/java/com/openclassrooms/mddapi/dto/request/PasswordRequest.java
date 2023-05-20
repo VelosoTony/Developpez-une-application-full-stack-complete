@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 /**
  * Represents a request to update a user's password.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Data
 @Builder

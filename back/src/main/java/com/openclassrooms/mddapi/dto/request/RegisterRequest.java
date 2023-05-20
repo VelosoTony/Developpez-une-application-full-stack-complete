@@ -5,6 +5,9 @@ import lombok.Data;
 
 /**
  * Represents a request to register a new user.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Data
 public class RegisterRequest {

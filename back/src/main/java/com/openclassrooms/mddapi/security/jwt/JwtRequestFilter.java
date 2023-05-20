@@ -20,6 +20,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * A filter that intercepts incoming requests and processes JWT authentication.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -31,13 +34,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	private JwtTokenUtility jwtTokenUtility;
 
 	/**
-	 * Processes the incoming request and performs JWT authentication.
+	 * {@inheritDoc}
 	 *
-	 * @param request  the HTTP servlet request
-	 * @param response the HTTP servlet response
-	 * @param chain    the filter chain
-	 * @throws ServletException if an error occurs during the filter process
-	 * @throws IOException      if an I/O error occurs during the filter process
+	 * Processes the incoming request and performs JWT authentication.
 	 */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)

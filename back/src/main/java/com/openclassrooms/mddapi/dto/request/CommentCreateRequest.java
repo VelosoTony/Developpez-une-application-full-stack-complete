@@ -6,6 +6,9 @@ import lombok.Data;
 
 /**
  * Represents a request object for creating a comment.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Data
 public class CommentCreateRequest {

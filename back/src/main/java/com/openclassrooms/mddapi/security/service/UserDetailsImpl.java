@@ -14,6 +14,9 @@ import lombok.Getter;
 /**
  * Implementation of Spring Security's UserDetails interface that represents a
  * user.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Builder
 @AllArgsConstructor
@@ -39,21 +42,25 @@ public class UserDetailsImpl implements UserDetails {
     return new HashSet<>();
   }
 
+  /** {@inheritDoc} */
   @Override
   public boolean isAccountNonExpired() {
     return true;
   }
 
+  /** {@inheritDoc} */
   @Override
   public boolean isAccountNonLocked() {
     return true;
   }
 
+  /** {@inheritDoc} */
   @Override
   public boolean isCredentialsNonExpired() {
     return true;
   }
 
+  /** {@inheritDoc} */
   @Override
   public boolean isEnabled() {
     return true;

@@ -23,6 +23,9 @@ import lombok.NoArgsConstructor;
 
 /**
  * Model representing a comment on a post.
+ *
+ * @author Tony
+ * @version $Id: $Id
  */
 @Data // annotation Lombok qui évite d'ajouter les getters et setters.
 @Builder
