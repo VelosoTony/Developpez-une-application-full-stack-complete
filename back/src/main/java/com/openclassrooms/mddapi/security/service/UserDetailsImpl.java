@@ -24,12 +24,17 @@ import lombok.Getter;
 public class UserDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;
 
+  /** The id associated with the user. */
   private Integer id;
-
+  /** The username associated with the user. */
   private String username;
-
+  /** The email associated with the user. */
   private String email;
 
+  /**
+   * The password associated with the user. This field is ignored during JSON
+   * serialization.
+   */
   @JsonIgnore
   private String password;
 

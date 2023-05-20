@@ -129,7 +129,7 @@ public class UserService {
     /**
      * Retrieves topics list from the authenticated user.
      *
-     * @return List<Topic> representing the list of User subscriptions.
+     * @return Topic[] representing the list of User subscriptions.
      */
     public List<Topic> getUserSubscription() {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()

@@ -11,12 +11,21 @@ import lombok.Data;
  */
 @Data
 public class PostCreateRequest {
+    /**
+     * The ID of the post.
+     */
     @NotBlank
     private Integer id;
 
+    /**
+     * The title of the post.
+     */
     @NotBlank
     private String title;
 
+    /**
+     * The content of the post.
+     */
     @NotBlank
     public String content;
 
