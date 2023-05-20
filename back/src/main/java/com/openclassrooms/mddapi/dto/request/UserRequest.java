@@ -1,8 +1,11 @@
-package com.openclassrooms.mddapi.payload.request;
+package com.openclassrooms.mddapi.dto.request;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+/**
+ * Represents a request to update user information.
+ */
 @Data
 public class UserRequest {
 

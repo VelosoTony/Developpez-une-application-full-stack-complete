@@ -9,15 +9,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.openclassrooms.mddapi.dto.response.UserResponse;
 import com.openclassrooms.mddapi.exception.BadRequestException;
 import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.models.User;
-import com.openclassrooms.mddapi.payload.response.UserResponse;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.security.service.UserDetailsImpl;
 
+/**
+ * Service class for managing users.
+ */
 @Service // Spécialisation de @Component
 public class UserService {
 
@@ -52,8 +55,8 @@ public class UserService {
         userResp.setId(usr.getId());
         userResp.setUsername(usr.getUsername());
         userResp.setEmail(usr.getEmail());
-        userResp.setCreated_date(usr.getCreatedDate());
-        userResp.setUpdated_date(usr.getUpdatedDate());
+        userResp.setCreatedDate(usr.getCreatedDate());
+        userResp.setUpdatedDate(usr.getUpdatedDate());
         System.out.println(usr.getTopics());
         userResp.setTopics(usr.getTopics());
         System.out.println(userResp);

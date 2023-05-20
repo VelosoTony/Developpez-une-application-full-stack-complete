@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.openclassrooms.mddapi.dto.request.PasswordRequest;
+import com.openclassrooms.mddapi.dto.request.UserRequest;
+import com.openclassrooms.mddapi.dto.response.UserResponse;
 import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.models.User;
-import com.openclassrooms.mddapi.payload.request.PasswordRequest;
-import com.openclassrooms.mddapi.payload.request.UserRequest;
-import com.openclassrooms.mddapi.payload.response.UserResponse;
 import com.openclassrooms.mddapi.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,6 +26,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+/**
+ * Controller class providing CRUD operations for user.
+ * It is a RESTful controller
+ */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
@@ -35,6 +39,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	/**
+	 * Retrieves the account information of the authenticated user.
+	 *
+	 * @return The ResponseEntity containing the user information.
+	 */
 	@GetMapping("/user")
 	@Operation(summary = "Get user information", description = "Retrieve account information")
 	@ApiResponses(value = {
@@ -46,13 +55,20 @@ public class UserController {
 
 	}
 
+	/**
+	 * Updates the account information of the authenticated user.
+	 *
+	 * @param userRequest The UserRequest object containing the updated user
+	 *                    information.
+	 * @return The ResponseEntity containing the updated user information.
+	 */
 	@PutMapping(value = "/user", produces = "application/json", consumes = "application/json")
 	@Operation(summary = "Update user information", description = "Update account information")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
 			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
 	public ResponseEntity<User> updateUser(@RequestBody UserRequest userRequest) {
-		System.out.println(userRequest);
+
 		User user = userService.getUser();
 		user.setEmail(userRequest.getEmail());
 		user.setUsername(userRequest.getUsername());
@@ -60,6 +76,13 @@ public class UserController {
 		return ResponseEntity.ok(user);
 	}
 
+	/**
+	 * Updates the password of the authenticated user.
+	 *
+	 * @param passwordRequest The PasswordRequest object containing the new
+	 *                        password.
+	 * @return The ResponseEntity containing the updated user information.
+	 */
 	@PutMapping(value = "/user/password", produces = "application/json", consumes = "application/json")
 	@Operation(summary = "Update user password", description = "Update password")
 	@ApiResponses(value = {
@@ -72,6 +95,12 @@ public class UserController {
 		return ResponseEntity.ok(userService.updatePassword(password));
 	}
 
+	/**
+	 * Retrieves the account information of a user specified by their email.
+	 *
+	 * @param email The email of the user.
+	 * @return The ResponseEntity containing the user information.
+	 */
 	@GetMapping("/user/{email}")
 	@Operation(summary = "Get user by email", description = "Retrieve account information about user specified by his email")
 	@ApiResponses(value = {
@@ -83,6 +112,11 @@ public class UserController {
 
 	}
 
+	/**
+	 * Retrieve account information about all users.
+	 *
+	 * @return The ResponseEntity containing the list of users information.
+	 */
 	@GetMapping("/users")
 	@Operation(summary = "Get all user", description = "Retrieve account information about all users")
 	@ApiResponses(value = {

@@ -16,6 +16,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Model representing an user.
+ */
 // annotation Lombok qui évite d'ajouter les getters et setters.
 @Builder
 @Data

@@ -11,13 +11,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.openclassrooms.mddapi.dto.request.LoginRequest;
+import com.openclassrooms.mddapi.dto.request.RegisterRequest;
+import com.openclassrooms.mddapi.dto.response.JwtResponse;
 import com.openclassrooms.mddapi.models.User;
-import com.openclassrooms.mddapi.payload.request.LoginRequest;
-import com.openclassrooms.mddapi.payload.request.RegisterRequest;
-import com.openclassrooms.mddapi.payload.response.JwtResponse;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.security.jwt.JwtTokenUtility;
 
+/**
+ * Service class for user details management and authentication.
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -33,6 +37,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	/**
+	 * Retrieves a user's details by their email address.
+	 *
+	 * @param email the email address of the user
+	 * @return the UserDetails object representing the user
+	 * @throws UsernameNotFoundException if the user is not found
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		User user = userRepository.findByEmail(email)
@@ -47,6 +58,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 				.build();
 	}
 
+	/**
+	 * Authenticates a user using their email and password.
+	 *
+	 * @param authenticationRequest the login request containing email and password
+	 * @return the JWT response containing the generated token
+	 * @throws Exception if authentication fails
+	 */
 	public JwtResponse login(LoginRequest authenticationRequest) throws Exception {
 
 		authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
@@ -70,6 +88,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		}
 	}
 
+	/**
+	 * Registers a new user with the provided details.
+	 *
+	 * @param user the register request containing user details
+	 * @return the JWT response containing the generated token
+	 * @throws Exception if user registration fails
+	 */
 	public JwtResponse register(RegisterRequest user) throws Exception {
 
 		User newUser = User.builder()

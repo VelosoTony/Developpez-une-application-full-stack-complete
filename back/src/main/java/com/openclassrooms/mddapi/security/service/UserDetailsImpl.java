@@ -11,6 +11,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * Implementation of Spring Security's UserDetails interface that represents a
+ * user.
+ */
 @Builder
 @AllArgsConstructor
 @Getter
@@ -26,6 +30,11 @@ public class UserDetailsImpl implements UserDetails {
   @JsonIgnore
   private String password;
 
+  /**
+   * Returns the authorities granted to the user.
+   *
+   * @return the authorities (in this implementation, always an empty set)
+   */
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return new HashSet<>();
   }

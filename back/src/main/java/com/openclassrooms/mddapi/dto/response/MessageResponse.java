@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.payload.response;
+package com.openclassrooms.mddapi.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 
+/**
+ * Represents a response containing a message string.
+ */
 @Data
 @Builder
 @AllArgsConstructor

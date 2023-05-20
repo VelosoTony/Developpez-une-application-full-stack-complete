@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.payload.response;
+package com.openclassrooms.mddapi.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +11,9 @@ import com.openclassrooms.mddapi.models.Topic;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 
+/**
+ * Represents a response containing a list of topics.
+ */
 @Data
 @Builder
 @AllArgsConstructor
