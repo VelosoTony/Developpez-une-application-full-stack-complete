@@ -2,6 +2,8 @@
 <button mat-icon-button routerLink="/posts">
   <mat-icon class="icon">arrow_back</mat-icon>
 </button>
-<app-post-list-item [post]="post" [onDetail]="false"></app-post-list-item>
-<hr />
-<app-post-comments></app-post-comments>
+<div class="container">
+  <app-post-list-item [post]="post" [onDetail]="false"></app-post-list-item>
+  <hr />
+  <app-post-comments></app-post-comments>
+</div>

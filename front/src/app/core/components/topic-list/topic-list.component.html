@@ -1,5 +1,10 @@
 <div class="container">
-  <mat-grid-list cols="2" rowHeight="250px" class="grid-list">
+  <mat-grid-list
+    [cols]="breakpoint"
+    rowHeight="200px"
+    [gutterSize]="'10px'"
+    (window:resize)="onResize($event)"
+  >
     <mat-grid-tile *ngFor="let topic of topics$ | async">
       <app-topic-list-item
         [topic]="topic"

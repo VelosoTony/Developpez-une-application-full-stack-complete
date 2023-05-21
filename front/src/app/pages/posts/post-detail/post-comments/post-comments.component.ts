@@ -45,7 +45,10 @@ export class PostCommentsComponent implements OnInit {
     this.postService
       .createComment(this.postId, commentCreateRequest)
       .subscribe({
-        next: (_: any) => {},
+        next: (_: any) => {
+          this.ngOnInit();
+          this.form.reset();
+        },
         error: (_error: any) => (this.onError = true),
       });
   }

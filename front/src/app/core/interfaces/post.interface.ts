@@ -7,5 +7,5 @@ export interface Post {
   user: User;
   title: string;
   content: string;
-  createdDate: Date;
+  createdDate?: Date;
 }

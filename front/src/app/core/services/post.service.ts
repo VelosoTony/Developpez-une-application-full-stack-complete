@@ -47,7 +47,7 @@ export class PostService {
       `${this.pathService}/${id}/comments ` + commentCreateRequest.content
     );
     return this.httpClient.post<Comment>(
-      `${this.pathService}/${id}/comments`,
+      `${this.pathService}/${id}/comment`,
       body
     );
   }

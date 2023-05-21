@@ -1,11 +1,13 @@
-<mat-card style="background-color: whitesmoke">
+<mat-card
+  style="background-color: rgb(240, 240, 240); border-radius: 8px; height: auto"
+>
   <mat-card-header>
     <mat-card-title>
-      <span>{{ topic.name }}</span>
+      {{ topic.name | titlecase }}
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <span>{{ topic.description }}</span>
+    {{ topic.description | titlecase }}
   </mat-card-content>
   <mat-card-footer>
     <div style="text-align: center">

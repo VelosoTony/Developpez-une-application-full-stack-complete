@@ -1,24 +1,14 @@
-<mat-card style="background-color: whitesmoke">
+<mat-card (click)="showDetail(post.id)" class="postCard">
   <mat-card-header>
     <mat-card-title>
-      <h1>{{ post.title | titlecase }}</h1>
-    </mat-card-title>
-    <mat-card-title>
-      <span>{{ post.createdDate | date : "dd/MM/yyyy" }}</span>
-      <span>{{ post.user.username | titlecase }}</span>
-      <span>{{ post.topic.name | titlecase }}</span>
+      {{ post.title | titlecase }}
     </mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <span *ngIf="!onDetail">{{ post.content }}</span>
-    <span *ngIf="onDetail">{{ post.content | slice : 0 : 255 }}...</span>
-    <button
-      *ngIf="onDetail"
-      mat-button
-      color="primary"
-      (click)="showDetail(post.id)"
-    >
-      <span>+détail</span>
-    </button>
+  <mat-card-content class="content">
+    <h3 class="column">{{ post.createdDate | date : "dd/MM/yyyy" }}</h3>
+    <h3 class="column">{{ post.user.username | titlecase }}</h3>
+    <h3 class="column">{{ post.topic.name | titlecase }}</h3>
+    <p *ngIf="!onDetail">{{ post.content }}</p>
+    <p *ngIf="onDetail">{{ post.content | slice : 0 : 255 }}...</p>
   </mat-card-content>
 </mat-card>

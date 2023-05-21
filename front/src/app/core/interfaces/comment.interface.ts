@@ -6,5 +6,5 @@ export interface Comment {
   topic: Topic;
   user: User;
   content: string;
-  createdDate: Date;
+  createdDate?: Date;
 }

@@ -13,6 +13,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   public posts!: Post[];
   public posts$!: Observable<Post[]>;
   private postSub!: Subscription;
+  public breakpoint!: number;
 
   constructor(
     private postService: PostService,
@@ -21,12 +22,16 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchPosts();
+    this.breakpoint = window.innerWidth <= 600 ? 1 : 2;
   }
 
   ngOnDestroy(): void {
     if (this.postSub !== undefined) {
       this.postSub.unsubscribe();
     }
+  }
+  onResize(event: Event): void {
+    this.breakpoint = window.innerWidth <= 600 ? 1 : 2;
   }
 
   public fetchPosts() {

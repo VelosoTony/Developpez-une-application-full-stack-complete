@@ -1,0 +1,16 @@
+.postCard {
+  background-color: whitesmoke;
+  border-radius: 8px;
+  height: auto;
+  cursor: pointer;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.column {
+  flex: 33.33%;
+}

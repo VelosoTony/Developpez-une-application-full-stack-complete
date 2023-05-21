@@ -1,41 +1,46 @@
 <h3>Commentaires</h3>
 <div class="center">
-  <mat-grid-list cols="2" rowHeight="250px" class="grid-list">
-    <mat-card *ngFor="let comment of comments$ | async" class="comment-card">
-      <mat-card-header>
-        <mat-card-title>{{ comment.user.username | titlecase }}</mat-card-title>
-        <mat-card-subtitle
-          >{{ comment.createdDate | date : "dd/MM/yyyy" }}
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        {{ comment.content }}
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-list>
-
-  <form [formGroup]="form" (submit)="submit()">
-    <mat-form-field appearance="outline">
-      <mat-label>Ecrivez ici votre commentaire</mat-label>
-      <textarea
-        matInput
-        type="text"
-        placeholder="content"
-        formControlName="content"
-      ></textarea>
-      <mat-error>Nombre de caractères min: 10 et max: 255</mat-error>
-      <button
-        mat-icon-button
-        matSuffix
-        color="primary"
-        type="submit"
-        [disabled]="form.invalid"
-      >
-        <mat-icon>send</mat-icon>
-      </button>
-      <p *ngIf="onError" class="error">
-        Erreur lors de la création de l'article.
-      </p>
-    </mat-form-field>
-  </form>
+  <div>
+    <mat-grid-list cols="2" rowHeight="250px" class="grid-list">
+      <mat-card *ngFor="let comment of comments$ | async" class="comment-card">
+        <mat-card-header>
+          <mat-card-title>{{
+            comment.user.username | titlecase
+          }}</mat-card-title>
+          <mat-card-subtitle
+            >{{ comment.createdDate | date : "dd/MM/yyyy" }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          {{ comment.content }}
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-list>
+  </div>
+  <div>
+    <form [formGroup]="form" (submit)="submit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Ecrivez ici votre commentaire</mat-label>
+        <textarea
+          matInput
+          type="text"
+          placeholder="content"
+          formControlName="content"
+        ></textarea>
+        <mat-error>Nombre de caractères min: 10 et max: 255</mat-error>
+        <button
+          mat-icon-button
+          matSuffix
+          color="primary"
+          type="submit"
+          [disabled]="form.invalid"
+        >
+          <mat-icon>send</mat-icon>
+        </button>
+        <p *ngIf="onError" class="error">
+          Erreur lors de la création de l'article.
+        </p>
+      </mat-form-field>
+    </form>
+  </div>
 </div>
