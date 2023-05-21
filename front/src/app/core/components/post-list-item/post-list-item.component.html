@@ -1,0 +1,14 @@
+<mat-card (click)="showDetail(post.id)" class="postCard">
+  <mat-card-header>
+    <mat-card-title>
+      {{ post.title | titlecase }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="content">
+    <h3 class="column">{{ post.createdDate | date : "dd/MM/yyyy" }}</h3>
+    <h3 class="column">{{ post.user.username | titlecase }}</h3>
+    <h3 class="column">{{ post.topic.name | titlecase }}</h3>
+    <p *ngIf="!onDetail">{{ post.content }}</p>
+    <p *ngIf="onDetail">{{ post.content | slice : 0 : 255 }}...</p>
+  </mat-card-content>
+</mat-card>

@@ -2,12 +2,12 @@
 <div class="container">
   <form *ngIf="user !== undefined" [formGroup]="userForm" (submit)="onSubmit()">
     <div class="center">
-      <div><h1>Profil utilisateur</h1></div>
-      <mat-form-field appearance="outline">
+      <h1>Profil utilisateur</h1>
+      <mat-form-field appearance="outline" style="width: 300px !important">
         <mat-label>Nom d'utilisateur</mat-label>
         <input matInput formControlName="username" id="username" type="text" />
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="width: 300px !important">
         <mat-label>Adresse email</mat-label>
         <input matInput formControlName="email" id="email" type="text" />
         <mat-error>Email incorrect</mat-error>
@@ -15,19 +15,18 @@
       <button mat-raised-button color="primary" [disabled]="userForm.invalid">
         Sauvegarder
       </button>
-      <div *ngIf="submittedInfo && successInfoMessage">
+      <span *ngIf="submittedInfo && successInfoMessage">
         {{ successInfoMessage }}
-      </div>
+      </span>
     </div>
   </form>
-  <div class="center"></div>
   <form
     *ngIf="user !== undefined"
     [formGroup]="passwordForm"
     (submit)="onSubmitPassword()"
   >
     <div class="center">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="width: 300px !important">
         <mat-label>Mot de passe</mat-label>
         <input
           matInput
@@ -35,10 +34,15 @@
           placeholder="Nouveau mot de passe"
           formControlName="newPassword"
         />
-        <button mat-icon-button matSuffix (click)="hide = !hide"></button>
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          style="margin: 0"
+        ></button>
         <mat-error>Mot de passe incorrect</mat-error>
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="width: 300px !important">
         <mat-label>Confirmation mot de passe</mat-label>
         <input
           matInput
@@ -52,6 +56,7 @@
           (click)="hide = !hide"
           [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide"
+          style="margin: 0"
         >
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
@@ -74,6 +79,6 @@
     <button mat-button color="warn" (click)="logout()">Se déconnecter</button>
   </div>
   <hr />
-  <div class="center"><h1>Abonnements</h1></div>
+  <h1>Abonnements</h1>
   <app-topic-list [onProfile]="true"></app-topic-list>
 </div>

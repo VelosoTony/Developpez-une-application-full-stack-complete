@@ -15,7 +15,11 @@ export class TopicService {
     return this.httpClient.get<Topic[]>(this.pathService);
   }
 
-  public subscribe(id: string): Observable<void> {
+  public unsubscribedTopics(): Observable<Topic[]> {
+    return this.httpClient.get<Topic[]>(`${this.pathService}/unsubscribed`);
+  }
+
+  public subscribeTopic(id: string): Observable<void> {
     console.log(`POST ${this.pathService}/${id}/subscribe`);
     return this.httpClient.post<void>(
       `${this.pathService}/${id}/subscribe`,
@@ -23,7 +27,7 @@ export class TopicService {
     );
   }
 
-  public unsubscribe(id: string): Observable<void> {
+  public unsubscribeTopic(id: string): Observable<void> {
     console.log(`DELETE ${this.pathService}/${id}/unsubscribe`);
     return this.httpClient.delete<void>(
       `${this.pathService}/${id}/unsubscribe`

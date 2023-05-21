@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.services;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,16 @@ import com.openclassrooms.mddapi.exception.BadRequestException;
 import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.models.User;
-import com.openclassrooms.mddapi.payload.response.UserResponse;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.security.service.UserDetailsImpl;
 
+/**
+ * Service class for managing users.
+ *
+ * @author Tony
+ * @version 1.0
+ */
 @Service // Spécialisation de @Component
 public class UserService {
 
@@ -31,62 +35,50 @@ public class UserService {
     private TopicRepository topicRepository;
 
     /**
-     * * Retrieves User details from an email.
-     * 
-     * @param email representing the email of user to retrieve.
-     * @return UserResponse reprensenting the User retrieved.
-     */
-    public UserResponse getUserByEmail(String email) {
-
-        Optional<User> user = userRepository.findByEmail(email);
-
-        User usr = user.get();
-        System.out.println(usr);
-        UserResponse userResp = new UserResponse();
-        userResp.setId(usr.getId());
-        userResp.setUsername(usr.getUsername());
-        userResp.setEmail(usr.getEmail());
-        userResp.setCreated_date(usr.getCreated_date());
-        userResp.setUpdated_date(usr.getUpdated_date());
-        System.out.println(usr.getTopics());
-        userResp.setTopics(usr.getTopics());
-        System.out.println(userResp);
-        return userResp;
-
-    }
-
-    /**
      * Retrieves the authenticated user details.
-     * 
+     *
      * @return User object representing the authenticated user.
      */
     public User getUser() {
+
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
-        Optional<User> user = userRepository.findByEmail(userDetails.getEmail());
-        User usr = user.get();
-        return usr;
 
+        return userRepository.findByEmail(userDetails.getEmail()).orElse(null);
+    }
+
+    /**
+     * Retrieves User details from an id.
+     *
+     * @param id a {@link java.lang.Integer} object
+     * @return a {@link com.openclassrooms.mddapi.models.User} object
+     */
+    public User getUserById(Integer id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            throw new NotFoundException();
+        }
+        return user;
     }
 
     /**
      * Update password for the authenticated user.
-     * 
+     *
      * @param password string containing the new password.
      * @return User object representing the updated user.
      */
     public User updatePassword(String password) {
-
+        /** Retrieves the authenticated user. */
         User user = getUser();
+
         user.setPassword(bcryptEncoder.encode(password));
 
-        System.out.println("Update Password for : " + user);
         return this.userRepository.save(user);
     }
 
     /**
      * Update the User details.
-     * 
+     *
      * @param user object representing the new user details.
      * @return User object representing the updated user.
      */
@@ -95,35 +87,29 @@ public class UserService {
         return this.userRepository.save(user);
     }
 
-    public Iterable<User> getUsers() {
-        return userRepository.findAll();
-    }
-
     /**
      * Retrieves topics list from the authenticated user.
-     * 
-     * @return List<Topic> representing the list of User subscriptions.
+     *
+     * @return Topic[] representing the list of User subscriptions.
      */
     public List<Topic> getUserSubscription() {
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
-        Optional<User> user = userRepository.findByEmail(userDetails.getEmail());
-        User usr = user.get();
-        List<Topic> subscriptions = usr.getTopics();
+        /** Retrieves the authenticated user. */
+        User user = getUser();
+        List<Topic> subscriptions = user.getTopics();
         return subscriptions;
 
     }
 
     /**
      * Add Topic to subscription list of authenticated user.
-     * 
+     *
      * @param topic_id representing the id of the topic to subscribe.
      */
     public void subscribeTopic(Integer topic_id) {
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        /** Retrieves the authenticated user. */
+        User user = getUser();
         Topic topic = this.topicRepository.findById(topic_id).orElse(null);
-        User user = this.userRepository.findById(userDetails.getId()).orElse(null);
+
         if (topic == null || user == null) {
             throw new NotFoundException();
         }
@@ -141,14 +127,14 @@ public class UserService {
 
     /**
      * Remove Topic to subscription list of authenticated user.
-     * 
+     *
      * @param topic_id representing the id of the topic to unsubscribe.
      */
     public void unsubscribeTopic(Integer topic_id) {
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        /** Retrieves the authenticated user. */
+        User user = getUser();
         Topic topic = this.topicRepository.findById(topic_id).orElse(null);
-        User user = this.userRepository.findById(userDetails.getId()).orElse(null);
+
         if (topic == null || user == null) {
             throw new NotFoundException();
         }

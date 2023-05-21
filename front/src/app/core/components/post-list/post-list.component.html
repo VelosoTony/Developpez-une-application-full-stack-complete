@@ -1,0 +1,12 @@
+<div class="container">
+  <mat-grid-list
+    [cols]="breakpoint"
+    rowHeight="250px"
+    [gutterSize]="'10px'"
+    (window:resize)="onResize($event)"
+  >
+    <mat-grid-tile *ngFor="let post of posts$ | async">
+      <app-post-list-item [post]="post" [onDetail]="true"></app-post-list-item>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

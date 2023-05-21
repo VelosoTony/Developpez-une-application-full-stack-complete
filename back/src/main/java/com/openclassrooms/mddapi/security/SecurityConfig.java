@@ -22,6 +22,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 
+/**
+ * Configuration class for Spring Security.
+ *
+ * @author Tony
+ * @version 1.0
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -35,6 +41,13 @@ public class SecurityConfig {
     @Autowired
     private JwtRequestFilter jwtRequestFilter; // NOSONAR
 
+    /**
+     * Configures the AuthenticationManagerBuilder to use the UserDetailsService and
+     * PasswordEncoder.
+     *
+     * @param auth the AuthenticationManagerBuilder instance
+     * @throws java.lang.Exception if an error occurs during configuration
+     */
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         // configure AuthenticationManager so that it knows from where to load
@@ -44,16 +57,37 @@ public class SecurityConfig {
                 .passwordEncoder(passwordEncoder());
     }
 
+    /**
+     * Creates a BCryptPasswordEncoder bean for password encoding.
+     *
+     * @return the PasswordEncoder bean
+     */
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Retrieves the AuthenticationManager bean from the
+     * AuthenticationConfiguration.
+     *
+     * @param authConfig the AuthenticationConfiguration instance
+     * @return the AuthenticationManager bean
+     * @throws java.lang.Exception if an error occurs while retrieving the
+     *                             AuthenticationManager
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
 
+    /**
+     * Configures the security filter chain for the HTTP requests.
+     *
+     * @param http the HttpSecurity instance
+     * @return the SecurityFilterChain
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -85,6 +119,11 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Creates an AuthenticationProvider bean for authentication.
+     *
+     * @return the AuthenticationProvider bean
+     */
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();

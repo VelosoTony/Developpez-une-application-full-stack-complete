@@ -1,8 +1,14 @@
-package com.openclassrooms.mddapi.payload.request;
+package com.openclassrooms.mddapi.dto.request;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+/**
+ * Represents a request to register a new user.
+ *
+ * @author Tony
+ * @version 1.0
+ */
 @Data
 public class RegisterRequest {
 

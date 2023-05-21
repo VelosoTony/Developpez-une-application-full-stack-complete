@@ -13,6 +13,7 @@ export class TopicListComponent implements OnInit, OnDestroy {
   public topics!: Topic[];
   public topics$!: Observable<Topic[]>;
   private topicSub!: Subscription;
+  public breakpoint!: number;
 
   @Input() onProfile!: boolean;
 
@@ -23,6 +24,7 @@ export class TopicListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchTopics();
+    this.breakpoint = window.innerWidth <= 600 ? 1 : 2;
   }
 
   ngOnDestroy(): void {
@@ -30,13 +32,16 @@ export class TopicListComponent implements OnInit, OnDestroy {
       this.topicSub.unsubscribe();
     }
   }
+  onResize(event: Event): void {
+    this.breakpoint = window.innerWidth <= 600 ? 1 : 2;
+  }
 
   public fetchTopics() {
     console.log('fetchTopics');
     if (this.onProfile) {
       this.topics$ = this.userService.getUserSubscription();
     } else {
-      this.topics$ = this.topicService.all();
+      this.topics$ = this.topicService.unsubscribedTopics();
     }
 
     this.topicSub = this.topics$.subscribe(
@@ -47,12 +52,14 @@ export class TopicListComponent implements OnInit, OnDestroy {
   public onTopicUnsubscribed(topic_id: string) {
     console.log('Delete ' + topic_id);
     this.topicService
-      .unsubscribe(topic_id)
+      .unsubscribeTopic(topic_id)
       .subscribe((_) => this.fetchTopics());
   }
 
   public onTopicSubscribed(topic_id: string) {
     console.log('Add ' + topic_id);
-    this.topicService.subscribe(topic_id).subscribe((_) => this.fetchTopics());
+    this.topicService
+      .subscribeTopic(topic_id)
+      .subscribe((_) => this.fetchTopics());
   }
 }

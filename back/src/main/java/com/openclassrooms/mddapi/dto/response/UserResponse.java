@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.payload.response;
+package com.openclassrooms.mddapi.dto.response;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,6 +11,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents a response containing user information.
+ *
+ * @author Tony
+ * @version 1.0
+ */
 @Data
 @Builder
 @AllArgsConstructor
@@ -23,10 +29,12 @@ public class UserResponse {
     private String username;
     @Schema(description = "User email", example = "Robert@mail.com")
     private String email;
+    @Schema(description = "User password", example = "1243pass")
+    private String password;
     @Schema(description = "date this user was created", example = "2023-03-18T00:23:42")
-    private LocalDateTime created_date;
+    private LocalDateTime createdDate;
     @Schema(description = "date this user was updated", example = "2023-03-18T00:23:42")
-    private LocalDateTime updated_date;
+    private LocalDateTime updatedDate;
     @Schema(description = "List of topics subscribed", example = "List<Topic>")
     private List<Topic> topics;
 

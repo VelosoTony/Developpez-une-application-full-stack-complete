@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.models;
 
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,6 +16,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Model representing an user.
+ *
+ * @author Tony
+ * @version 1.0
+ */
 // annotation Lombok qui évite d'ajouter les getters et setters.
 @Builder
 @Data
@@ -44,11 +50,13 @@ public class User {
 
     @Schema(description = "date this user was created", example = "2023-03-18T00:23:42")
     @CreatedDate
-    private LocalDateTime created_date;
+    @Column(name = "created_date", updatable = false)
+    private LocalDateTime createdDate;
 
     @Schema(description = "date this user was updated", example = "2023-03-18T00:23:42")
-    @LastModifiedDate
-    private LocalDateTime updated_date;
+    @UpdateTimestamp
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
 
     @Schema(description = "List of subscribed topics ", example = "List<Topic>")
     @ManyToMany(fetch = FetchType.EAGER)

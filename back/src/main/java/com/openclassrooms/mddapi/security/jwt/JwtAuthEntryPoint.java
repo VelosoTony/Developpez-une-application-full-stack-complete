@@ -10,9 +10,21 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+/**
+ * JWT Authentication Entry Point.
+ * Handles unauthorized requests and sends an unauthorized response.
+ *
+ * @author Tony
+ * @version 1.0
+ */
 @Component
 public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
 
+    /**
+     * {@inheritDoc}
+     *
+     * Handles unauthorized requests and sends an unauthorized response.
+     */
     @Override
     public void commence(HttpServletRequest request,
             HttpServletResponse response,

@@ -13,6 +13,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Model representing a post.
+ *
+ * @author Tony
+ * @version 1.0
+ */
 @Data // annotation Lombok qui évite d'ajouter les getters et setters.
 @Builder
 @Entity // annotation qui indique que la classe correspond à une table de la BD.
@@ -25,7 +31,8 @@ public class Post {
     @Schema(description = "Post identifier", example = "1")
     @Id // clé primaire de la table
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id est auto-incrémenté
-    private Integer post_id;
+    @Column(name = "post_id")
+    private Integer id;
 
     @Schema(description = "Topic identifier", example = "1")
     @ManyToOne
@@ -43,8 +50,9 @@ public class Post {
     @Schema(description = "Content", example = "Lot of new features for this new version of Java.")
     private String content;
 
-    @Schema(description = "date this user was created", example = "2023-03-18T00:23:42")
+    @Schema(description = "date this Post was created", example = "2023-03-18T00:23:42")
     @CreatedDate
-    private LocalDateTime created_date;
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
 
 }

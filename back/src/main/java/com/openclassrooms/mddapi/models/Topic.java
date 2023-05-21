@@ -10,6 +10,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Model representing a topic.
+ *
+ * @author Tony
+ * @version 1.0
+ */
 @Data // annotation Lombok qui évite d'ajouter les getters et setters.
 @Builder
 @Entity // annotation qui indique que la classe correspond à une table de la BD.
