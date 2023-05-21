@@ -29,5 +29,5 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
      * @return a list of post with topic_IDs not present in the given array
      * @param topics list of subscribed topics for user
      */
-    List<Post> findByTopicNotIn(List<Topic> topics);
+    List<Post> findByTopicIn(List<Topic> topics);
 }

@@ -52,7 +52,7 @@ public class PostService {
             return Collections.emptyList();
         }
         /** else return only Not subscribed topics */
-        return this.postRepository.findByTopicNotIn(topics);
+        return this.postRepository.findByTopicIn(topics);
     }
 
     /**
