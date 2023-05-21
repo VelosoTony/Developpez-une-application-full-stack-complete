@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.dto.request.PasswordRequest;
 import com.openclassrooms.mddapi.dto.request.UserRequest;
+import com.openclassrooms.mddapi.dto.response.TopicResponse;
 import com.openclassrooms.mddapi.dto.response.UserResponse;
+import com.openclassrooms.mddapi.mapper.TopicMapper;
+import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.services.UserService;
@@ -42,6 +44,12 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private UserMapper userMapper;
+
+	@Autowired
+	private TopicMapper topicMapper;
+
 	/**
 	 * Retrieves the account information of the authenticated user.
 	 *
@@ -52,10 +60,18 @@ public class UserController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
 			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
-	public ResponseEntity<User> getUser() {
+	public ResponseEntity<UserResponse> getUser() {
+		try {
+			User user = userService.getUser();
 
-		return ResponseEntity.ok(userService.getUser());
+			if (user == null) {
+				return ResponseEntity.notFound().build();
+			}
 
+			return ResponseEntity.ok().body(this.userMapper.toDto(user));
+		} catch (NumberFormatException e) {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 
 	/**
@@ -70,13 +86,22 @@ public class UserController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
 			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
-	public ResponseEntity<User> updateUser(@RequestBody UserRequest userRequest) {
+	public ResponseEntity<UserResponse> updateUser(@RequestBody UserRequest userRequest) {
+		try {
+			User user = userService.getUser();
 
-		User user = userService.getUser();
-		user.setEmail(userRequest.getEmail());
-		user.setUsername(userRequest.getUsername());
-		user = userService.updateUser(user);
-		return ResponseEntity.ok(user);
+			if (user == null) {
+				return ResponseEntity.notFound().build();
+			}
+			user.setEmail(userRequest.getEmail());
+			user.setUsername(userRequest.getUsername());
+
+			User updatedUser = this.userService.updateUser(user);
+
+			return ResponseEntity.ok().body(this.userMapper.toDto(updatedUser));
+		} catch (NumberFormatException e) {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 
 	/**
@@ -91,43 +116,20 @@ public class UserController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
 			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
-	public ResponseEntity<User> updatePassword(@RequestBody PasswordRequest passwordRequest) {
+	public ResponseEntity<UserResponse> updatePassword(@RequestBody PasswordRequest passwordRequest) {
+		try {
+			User user = userService.getUser();
 
-		String password = passwordRequest.getPassword();
+			if (user == null) {
+				return ResponseEntity.notFound().build();
+			}
 
-		return ResponseEntity.ok(userService.updatePassword(password));
-	}
+			User updatedUser = userService.updatePassword(passwordRequest.getPassword());
 
-	/**
-	 * Retrieves the account information of a user specified by their email.
-	 *
-	 * @param email The email of the user.
-	 * @return The ResponseEntity containing the user information.
-	 */
-	@GetMapping("/user/{email}")
-	@Operation(summary = "Get user by email", description = "Retrieve account information about user specified by his email")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
-			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
-	public ResponseEntity<UserResponse> getUserByEmail(@PathVariable String email) {
-
-		return ResponseEntity.ok(userService.getUserByEmail(email));
-
-	}
-
-	/**
-	 * Retrieve account information about all users.
-	 *
-	 * @return The ResponseEntity containing the list of users information.
-	 */
-	@GetMapping("/users")
-	@Operation(summary = "Get all user", description = "Retrieve account information about all users")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
-			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
-	public ResponseEntity<Iterable<User>> getUsers() {
-
-		return ResponseEntity.ok(userService.getUsers());
+			return ResponseEntity.ok().body(this.userMapper.toDto(updatedUser));
+		} catch (NumberFormatException e) {
+			return ResponseEntity.badRequest().build();
+		}
 
 	}
 
@@ -141,9 +143,11 @@ public class UserController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
 			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
-	public ResponseEntity<List<Topic>> getUserSubscription() {
+	public ResponseEntity<List<TopicResponse>> getUserSubscription() {
 
-		return ResponseEntity.ok(userService.getUserSubscription());
+		List<Topic> topics = userService.getUserSubscription();
+
+		return ResponseEntity.ok(this.topicMapper.toDto(topics));
 
 	}
 

@@ -4,12 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import com.openclassrooms.mddapi.dto.response.TopicListResponse;
+import com.openclassrooms.mddapi.dto.response.TopicResponse;
+import com.openclassrooms.mddapi.mapper.TopicMapper;
 import com.openclassrooms.mddapi.models.Topic;
-import com.openclassrooms.mddapi.security.service.UserDetailsImpl;
 import com.openclassrooms.mddapi.services.TopicService;
 import com.openclassrooms.mddapi.services.UserService;
 
@@ -39,35 +38,42 @@ public class TopicController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private TopicMapper topicMapper;
+
 	/**
 	 * Retrieves information of all topics.
 	 *
 	 * @return Topic[] The list of all topics.
 	 */
 	@GetMapping("")
-	@Operation(summary = "Get list topics", description = "Retrieve information of all topics")
+	@Operation(summary = "Get list of topics", description = "Retrieve information of all topics")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TopicListResponse.class))),
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TopicResponse.class))),
 			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
-	public List<Topic> getTopics() {
+	public ResponseEntity<List<TopicResponse>> getTopics() {
 
-		return topicService.getUnsubscribedTopics();
+		List<Topic> topics = this.topicService.getAllTopics();
+
+		return ResponseEntity.ok(this.topicMapper.toDto(topics));
 
 	}
 
 	/**
-	 * Retrieves information of topics subscribed by authenticated user.
+	 * Retrieves information of topics unsubscribed by authenticated user.
 	 *
-	 * @return Topic[] The list of topics subscribed by user.
+	 * @return Topic[] The list of topics unsubscribed by user.
 	 */
-	@GetMapping("/subscribed")
-	@Operation(summary = "Get subscribed topics", description = "Retrieve information of all subscribed topics")
+	@GetMapping("/unsubscribed")
+	@Operation(summary = "Get unsubscribed topics", description = "Retrieve information of all unsubscribed topics")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TopicListResponse.class))),
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TopicResponse.class))),
 			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
-	public List<Topic> getTopicsSubscribed() {
+	public ResponseEntity<List<TopicResponse>> getTopicsUnsubscribed() {
 
-		return userService.getUserSubscription();
+		List<Topic> topics = topicService.getUnsubscribedTopics();
+
+		return ResponseEntity.ok(this.topicMapper.toDto(topics));
 
 	}
 
@@ -84,11 +90,7 @@ public class TopicController {
 			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
 	public ResponseEntity<?> subscribe(@PathVariable("id") Integer topic_id) {
 		try {
-			UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
-
 			this.userService.subscribeTopic(topic_id);
-			System.out.println("Subscribe User[" + user.getId() + "] to Topic[" + topic_id + "]");
 			return ResponseEntity.ok().build();
 		} catch (NumberFormatException e) {
 			return ResponseEntity.badRequest().build();
@@ -109,10 +111,7 @@ public class TopicController {
 			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
 	public ResponseEntity<?> unsubscribe(@PathVariable("id") Integer topic_id) {
 		try {
-			UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
 			this.userService.unsubscribeTopic(topic_id);
-			System.out.println("Unsubscribe User[" + user.getId() + "] from Topic[" + topic_id + "]");
 			return ResponseEntity.ok().build();
 		} catch (NumberFormatException e) {
 			return ResponseEntity.badRequest().build();

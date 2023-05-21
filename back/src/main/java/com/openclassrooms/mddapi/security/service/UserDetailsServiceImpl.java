@@ -41,8 +41,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private AuthenticationManager authenticationManager;
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * Retrieves a user's details by their email address.
 	 */
 	@Override

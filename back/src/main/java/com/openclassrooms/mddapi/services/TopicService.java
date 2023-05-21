@@ -49,9 +49,11 @@ public class TopicService {
     public List<Topic> getUnsubscribedTopics() {
 
         Integer[] topicsId = userService.getUserSubscription().stream().map(Topic::getId).toArray(Integer[]::new);
+        /** If users doesn't have subscriptions, then return all topics */
         if (topicsId.length == 0) {
             return this.topicRepository.findAll();
         }
+        /** else return only Not subscribed topics */
         return this.topicRepository.findByIdNotIn(topicsId);
 
     }

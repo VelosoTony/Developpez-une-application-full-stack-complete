@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.services;
 
+import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.models.Post;
+import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.repository.CommentRepository;
 import com.openclassrooms.mddapi.repository.PostRepository;
 
@@ -25,6 +27,9 @@ public class PostService {
     @Autowired
     private CommentRepository commentRepository;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * Retrieves all posts sorted by created date in descending order.
      *
@@ -32,6 +37,22 @@ public class PostService {
      */
     public List<Post> getAllPosts() {
         return this.postRepository.findAll(Sort.by(Sort.Direction.DESC, "createdDate"));
+    }
+
+    /**
+     * Retrieves all posts sorted by created date in descending order.
+     *
+     * @return the list of posts
+     */
+    public List<Post> getPostsForUser() {
+
+        List<Topic> topics = userService.getUserSubscription();
+        /** If users doesn't have subscriptions, then return all topics */
+        if (topics.isEmpty()) {
+            return Collections.emptyList();
+        }
+        /** else return only Not subscribed topics */
+        return this.postRepository.findByTopicNotIn(topics);
     }
 
     /**
@@ -76,9 +97,10 @@ public class PostService {
     public Comment addPostComment(Integer id, String content) {
         Comment newComment = Comment.builder()
                 .content(content)
+                .user(this.userService.getUser())
                 .post(getPostById(id))
                 .build();
-
+        System.out.println(newComment);
         return this.commentRepository.save(newComment);
     }
 

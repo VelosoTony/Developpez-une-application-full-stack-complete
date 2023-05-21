@@ -29,6 +29,8 @@ public class UserResponse {
     private String username;
     @Schema(description = "User email", example = "Robert@mail.com")
     private String email;
+    @Schema(description = "User password", example = "1243pass")
+    private String password;
     @Schema(description = "date this user was created", example = "2023-03-18T00:23:42")
     private LocalDateTime createdDate;
     @Schema(description = "date this user was updated", example = "2023-03-18T00:23:42")

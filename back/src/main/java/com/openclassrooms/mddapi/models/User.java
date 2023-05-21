@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.models;
 
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -50,11 +50,11 @@ public class User {
 
     @Schema(description = "date this user was created", example = "2023-03-18T00:23:42")
     @CreatedDate
-    @Column(name = "created_date")
+    @Column(name = "created_date", updatable = false)
     private LocalDateTime createdDate;
 
     @Schema(description = "date this user was updated", example = "2023-03-18T00:23:42")
-    @LastModifiedDate
+    @UpdateTimestamp
     @Column(name = "updated_date")
     private LocalDateTime updatedDate;
 

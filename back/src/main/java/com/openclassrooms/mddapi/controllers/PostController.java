@@ -3,17 +3,17 @@ package com.openclassrooms.mddapi.controllers;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import com.openclassrooms.mddapi.dto.request.CommentCreateRequest;
 import com.openclassrooms.mddapi.dto.request.PostCreateRequest;
-import com.openclassrooms.mddapi.dto.response.TopicListResponse;
+import com.openclassrooms.mddapi.dto.response.PostResponse;
+import com.openclassrooms.mddapi.dto.response.TopicResponse;
+import com.openclassrooms.mddapi.mapper.PostMapper;
 import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.models.Post;
 import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.models.User;
-import com.openclassrooms.mddapi.security.service.UserDetailsImpl;
 import com.openclassrooms.mddapi.services.PostService;
 import com.openclassrooms.mddapi.services.TopicService;
 import com.openclassrooms.mddapi.services.UserService;
@@ -47,19 +47,24 @@ public class PostController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PostMapper postMapper;
+
     /**
-     * Retrieves information of all posts.
+     * Retrieves information of posts related to topics subscribed by user.
      *
-     * @return Post[] The list of all posts.
+     * @return Post[] The list of posts by interest.
      */
     @GetMapping("")
-    @Operation(summary = "Get all posts", description = "Retrieve information of all posts")
+    @Operation(summary = "Get posts for user", description = "Retrieves information of posts related to topics subscribed by user")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TopicListResponse.class))),
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TopicResponse.class))),
             @ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
-    public List<Post> getPosts() {
+    public ResponseEntity<List<PostResponse>> getPostsForUser() {
 
-        return postService.getAllPosts();
+        List<Post> posts = this.postService.getPostsForUser();
+
+        return ResponseEntity.ok(this.postMapper.toDto(posts));
     }
 
     /**
@@ -71,11 +76,13 @@ public class PostController {
     @GetMapping("/{id}")
     @Operation(summary = "Get post by id", description = "Retrieve information of specified post by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TopicListResponse.class))),
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TopicResponse.class))),
             @ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
-    public Post getPostById(@PathVariable("id") Integer id) {
+    public ResponseEntity<PostResponse> getPostById(@PathVariable("id") Integer id) {
 
-        return postService.getPostById(id);
+        Post post = this.postService.getPostById(id);
+
+        return ResponseEntity.ok(this.postMapper.toDto(post));
     }
 
     /**
@@ -89,9 +96,9 @@ public class PostController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Comment.class))),
             @ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
-    public List<Comment> getCommentsPostById(@PathVariable("id") Integer id) {
+    public ResponseEntity<List<Comment>> getCommentsPostById(@PathVariable("id") Integer id) {
 
-        return postService.getCommentsPostById(id);
+        return ResponseEntity.ok(postService.getCommentsPostById(id));
     }
 
     /**
@@ -102,17 +109,15 @@ public class PostController {
      *                       content.
      * @return Comment The created comment.
      */
-    @PostMapping("/{id}/comments")
+    @PostMapping("/{id}/comment")
     @Operation(summary = "Add a comment to post", description = "Add a comment to a specified post by id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Comment.class))),
             @ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
-    public Comment addPostComment(@PathVariable("id") Integer id,
+    public ResponseEntity<Comment> addPostComment(@PathVariable("id") Integer id,
             @RequestBody CommentCreateRequest commentRequest) {
 
-        System.out.println(commentRequest);
-
-        return this.postService.addPostComment(id, commentRequest.getContent());
+        return ResponseEntity.ok(this.postService.addPostComment(id, commentRequest.getContent()));
     }
 
     /**
@@ -129,10 +134,7 @@ public class PostController {
             @ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
     public ResponseEntity<?> createPost(@RequestBody PostCreateRequest postRequest) {
         try {
-            UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
-                    .getPrincipal();
-
-            User usr = userService.getUserById(user.getId());
+            User usr = userService.getUser();
 
             Topic topic = topicService.getTopicById(postRequest.getId());
 
