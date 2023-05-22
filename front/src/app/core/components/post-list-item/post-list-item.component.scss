@@ -1,16 +1,43 @@
-.postCard {
+.post-card {
   background-color: whitesmoke;
   border-radius: 8px;
   height: auto;
+  width: 95%;
   cursor: pointer;
+  margin: 0 15px;
+}
+
+.post-card-alone {
+  background-color: none;
+  border-radius: 0px;
+  height: auto;
+  width: 90%;
+  box-shadow: none;
+  margin: 0 15px;
 }
 
 .content {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
+  width: 96%;
+  margin: 0;
+  padding: 0 2%;
 }
 .column {
   flex: 33.33%;
+}
+mat-card-title {
+  font-size: 1.2rem;
+  padding: 2% 0;
+}
+mat-card-subtitle {
+  font-size: 1rem;
+  padding: 2% 0;
+}
+
+@media (max-width: 600px) {
+  .post-card {
+    width: 95%;
+  }
 }

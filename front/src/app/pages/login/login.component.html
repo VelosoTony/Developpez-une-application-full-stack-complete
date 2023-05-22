@@ -1,47 +1,47 @@
-<app-header></app-header>
-
-<button mat-icon-button routerLink="/">
-  <mat-icon class="icon">arrow_back</mat-icon>
-</button>
-<div class="container">
-  <h1>Se connecter</h1>
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="center">
-      <mat-form-field appearance="outline" style="width: 300px !important">
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="Email" formControlName="email" />
-        <mat-error>Email incorrect</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline" style="width: 300px !important">
-        <mat-label>Mot de passe</mat-label>
-        <input
-          matInput
-          [type]="hide ? 'password' : 'text'"
-          placeholder="Password"
-          formControlName="password"
-        />
+<div>
+  <button mat-icon-button routerLink="/">
+    <mat-icon class="icon">arrow_back</mat-icon>
+  </button>
+  <div class="container">
+    <h1>Se connecter</h1>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="center">
+        <mat-form-field appearance="outline" style="width: 300px !important">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email" />
+          <mat-error>Email incorrect</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 300px !important">
+          <mat-label>Mot de passe</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          <mat-error>Password incorrect</mat-error>
+        </mat-form-field>
         <button
-          mat-icon-button
-          matSuffix
-          (click)="hide = !hide"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide"
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="form.invalid"
         >
-          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          Se connecter
         </button>
-        <mat-error>Password incorrect</mat-error>
-      </mat-form-field>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="form.invalid"
-      >
-        Se connecter
-      </button>
-      <span *ngIf="onError" class="error">
-        Erreur: email ou mot de passe incorrect
-      </span>
-    </div>
-  </form>
+        <span *ngIf="onError" class="error">
+          Erreur: email ou mot de passe incorrect
+        </span>
+      </div>
+    </form>
+  </div>
 </div>

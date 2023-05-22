@@ -1,10 +1,11 @@
 import { FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Comment } from 'src/app/core/interfaces/comment.interface';
 import { PostService } from 'src/app/core/services/post.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommentCreateRequest } from 'src/app/core/interfaces/request/commentCreateRequest.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-post-comments',
@@ -19,18 +20,17 @@ export class PostCommentsComponent implements OnInit {
   public form = this.fb.group({
     content: [
       '',
-      [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(255),
-      ],
+      [Validators.required, Validators.minLength(5), Validators.maxLength(255)],
     ],
   });
 
   constructor(
+    private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
     private postService: PostService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private matSnackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -40,16 +40,22 @@ export class PostCommentsComponent implements OnInit {
   }
 
   public submit(): void {
-    const commentCreateRequest = this.form.value as CommentCreateRequest;
-    console.log(commentCreateRequest);
-    this.postService
-      .createComment(this.postId, commentCreateRequest)
-      .subscribe({
-        next: (_: any) => {
-          this.ngOnInit();
-          this.form.reset();
-        },
-        error: (_error: any) => (this.onError = true),
-      });
+    if (this.form.valid) {
+      const commentCreateRequest = this.form.value as CommentCreateRequest;
+      console.log(commentCreateRequest);
+      this.postService
+        .createComment(this.postId, commentCreateRequest)
+        .subscribe({
+          next: (resp) => {
+            this.infoTip('Commentaire ajouté !');
+            this.form.setValue({ content: '' });
+            this.ngOnInit();
+          },
+          error: (_error: any) => (this.onError = true),
+        });
+    }
+  }
+  private infoTip(message: string): void {
+    this.matSnackBar.open(message, 'Close', { duration: 3000 });
   }
 }

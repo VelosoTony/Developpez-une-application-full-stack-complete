@@ -30,6 +30,10 @@ import { PostListItemComponent } from './core/components/post-list-item/post-lis
 import { PostFormComponent } from './pages/posts/post-form/post-form.component';
 import { PostDetailComponent } from './pages/posts/post-detail/post-detail.component';
 import { PostCommentsComponent } from './pages/posts/post-detail/post-comments/post-comments.component';
+import { ShortenPipe } from './core/pipes/shorten.pipe';
+import { TimeAgoPipe } from './core/pipes/time-ago';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatMenuModule} from '@angular/material/menu';
 
 const materialModule = [
   MatButtonModule,
@@ -39,8 +43,10 @@ const materialModule = [
   MatFormFieldModule,
   MatInputModule,
   MatSidenavModule,
+  MatSnackBarModule,
   MatToolbarModule,
   MatSelectModule,
+  MatMenuModule,
 ];
 @NgModule({
   declarations: [
@@ -59,6 +65,8 @@ const materialModule = [
     PostFormComponent,
     PostDetailComponent,
     PostCommentsComponent,
+    ShortenPipe,
+    TimeAgoPipe,
   ],
   imports: [
     BrowserModule,

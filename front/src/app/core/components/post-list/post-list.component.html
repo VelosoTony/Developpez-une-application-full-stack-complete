@@ -1,12 +1,16 @@
-<div class="container">
+<div class="container" *ngIf="(posts$ | async)?.length; else emptyPosts">
   <mat-grid-list
     [cols]="breakpoint"
-    rowHeight="250px"
+    rowHeight="240px"
     [gutterSize]="'10px'"
     (window:resize)="onResize($event)"
   >
     <mat-grid-tile *ngFor="let post of posts$ | async">
-      <app-post-list-item [post]="post" [onDetail]="true"></app-post-list-item>
+      <app-post-list-item [post]="post" [onDetail]="false"></app-post-list-item>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
+<ng-template #emptyPosts>
+  <!-- Content to display when the posts array is empty -->
+  <div class="center">Aucun article correspond à vos abonnements.</div>
+</ng-template>

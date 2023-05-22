@@ -6,6 +6,7 @@ import { PostCreateRequest } from 'src/app/core/interfaces/request/postCreateReq
 import { Topic } from 'src/app/core/interfaces/topic.interface';
 import { PostService } from 'src/app/core/services/post.service';
 import { TopicService } from 'src/app/core/services/topic.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-post-form',
@@ -18,15 +19,19 @@ export class PostFormComponent {
 
   public form = this.fb.group({
     topicId: ['', [Validators.required]],
-    title: ['', [Validators.required], Validators.maxLength(255)],
-    content: ['', [Validators.required]],
+    title: [
+      '',
+      [Validators.required, Validators.minLength(5), Validators.maxLength(255)],
+    ],
+    content: ['', [Validators.required, Validators.minLength(10)]],
   });
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private topicService: TopicService,
-    private postService: PostService
+    private postService: PostService,
+    private matSnackBar: MatSnackBar
   ) {
     this.topics$ = this.topicService.all();
   }
@@ -37,8 +42,15 @@ export class PostFormComponent {
     this.postService.createPost(postCreateRequest).subscribe({
       next: (_) => {
         this.router.navigate(['/posts']);
+        this.infoTip('Article créé avec succès !');
       },
-      error: (_error: any) => (this.onError = true),
+      error: (_error: any) => {
+        this.onError = true;
+        this.infoTip("Erreur à la création de l'article!");
+      },
     });
+  }
+  private infoTip(message: string): void {
+    this.matSnackBar.open(message, 'Close', { duration: 3000 });
   }
 }

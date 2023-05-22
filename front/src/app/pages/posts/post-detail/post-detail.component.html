@@ -1,9 +1,14 @@
-<app-header></app-header>
-<button mat-icon-button routerLink="/posts">
-  <mat-icon class="icon">arrow_back</mat-icon>
-</button>
-<div class="container">
-  <app-post-list-item [post]="post" [onDetail]="false"></app-post-list-item>
-  <hr />
-  <app-post-comments></app-post-comments>
+<div class="flex-container">
+  <div>
+    <button mat-icon-button routerLink="/posts">
+      <mat-icon class="icon">arrow_back</mat-icon>
+    </button>
+  </div>
+  <div class="center">
+    <app-post-list-item [post]="post" [onDetail]="true"></app-post-list-item>
+    <hr
+      style="color: lightgrey; border: 0.5px solid; width: 90%; margin-left: 0"
+    />
+    <app-post-comments></app-post-comments>
+  </div>
 </div>

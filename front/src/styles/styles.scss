@@ -18,7 +18,7 @@ body {
 }
 
 button {
-  margin: 10px;
+  margin: 15px;
 }
 
 a {
@@ -36,7 +36,8 @@ h1 {
   padding: 1em;
 }
 .container {
-  padding: 0 20px;
+  margin: 0;
+  padding: 0;
   height: calc(100vh - 64px);
   overflow: auto;
 }
@@ -44,10 +45,8 @@ h1 {
 .center {
   height: auto;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 10px;
 }
 
 .error {
@@ -56,4 +55,25 @@ h1 {
 
 .icon {
   transform: scale(2);
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  margin: 1% 0;
+}
+mat-card-subtitle {
+  font-size: 1rem;
+  margin: 1% 0;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 600px) {
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+  }
 }

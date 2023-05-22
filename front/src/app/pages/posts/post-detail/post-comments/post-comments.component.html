@@ -1,25 +1,27 @@
 <h3>Commentaires</h3>
-<div class="center">
-  <div>
-    <mat-grid-list cols="2" rowHeight="250px" class="grid-list">
+<div class="comment-container">
+  <div class="comment-list">
+    <mat-grid-list cols="1" rowHeight="fit">
       <mat-card *ngFor="let comment of comments$ | async" class="comment-card">
-        <mat-card-header>
-          <mat-card-title>{{
-            comment.user.username | titlecase
-          }}</mat-card-title>
-          <mat-card-subtitle
-            >{{ comment.createdDate | date : "dd/MM/yyyy" }}
-          </mat-card-subtitle>
-        </mat-card-header>
         <mat-card-content>
           {{ comment.content }}
         </mat-card-content>
+        <mat-card-footer>
+          <mat-card-subtitle>
+            <b>
+              <i>
+                {{ comment.user.username | titlecase }},
+                {{ comment.createdDate | timeAgo }}
+              </i>
+            </b>
+          </mat-card-subtitle>
+        </mat-card-footer>
       </mat-card>
     </mat-grid-list>
   </div>
-  <div>
+  <div class="comment-form">
     <form [formGroup]="form" (submit)="submit()">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="comment-input">
         <mat-label>Ecrivez ici votre commentaire</mat-label>
         <textarea
           matInput
@@ -27,7 +29,7 @@
           placeholder="content"
           formControlName="content"
         ></textarea>
-        <mat-error>Nombre de caractères min: 10 et max: 255</mat-error>
+        <mat-error>Nombre de caractères min: 5 et max: 255</mat-error>
         <button
           mat-icon-button
           matSuffix
@@ -35,12 +37,12 @@
           type="submit"
           [disabled]="form.invalid"
         >
-          <mat-icon>send</mat-icon>
+          <mat-icon class="send-btn">send</mat-icon>
         </button>
-        <p *ngIf="onError" class="error">
-          Erreur lors de la création de l'article.
-        </p>
       </mat-form-field>
+      <p *ngIf="onError" class="error">
+        Erreur lors de la création de l'article.
+      </p>
     </form>
   </div>
 </div>

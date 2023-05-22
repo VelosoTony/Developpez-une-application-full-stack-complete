@@ -6,6 +6,7 @@ import { User } from 'src/app/core/interfaces/user.interface';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { passwordValidator } from 'src/app/core/validators/password.validator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -14,10 +15,6 @@ import { passwordValidator } from 'src/app/core/validators/password.validator';
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   public currentEmail!: String;
-  public submittedInfo = false;
-  public successInfoMessage = '';
-  public submittedPass = false;
-  public successPassMessage = '';
   public hide = true;
   public user!: User;
   private userSub!: Subscription;
@@ -43,7 +40,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private router: Router,
     private userService: UserService,
     private sessionService: SessionService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private matSnackBar: MatSnackBar
   ) {}
 
   private passwordMatchValidator(control: AbstractControl) {
@@ -108,9 +106,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (updateUser: User) => {
             this.user = updateUser;
-            this.successInfoMessage = 'Informations mise à jour!';
-            this.submittedInfo = true;
-            if (this.currentEmail !== email) this.logout();
+            this.infoTip('Informations mise à jour!');
+            if (this.currentEmail !== email) {
+              this.infoTip('Email modifié, vous devez vous reconnecter!');
+              this.logout();
+            }
           },
           error: (_: any) => null,
         });
@@ -124,11 +124,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.passUpdateSub = this.userService.updatePassword(pass).subscribe({
         next: (updateUser: User) => {
           this.user = updateUser;
-          this.successPassMessage = 'Mot de passe modifié!';
-          this.submittedPass = true;
+          this.infoTip('Mot de passe modifié!');
         },
         error: (_: any) => null,
       });
     }
+  }
+  private infoTip(message: string): void {
+    this.matSnackBar.open(message, 'Close', { duration: 3000 });
   }
 }

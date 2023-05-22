@@ -12,7 +12,7 @@
 }
 
 .link:hover {
-  color: --secondary-color;
+  color: var(--secondary-color);
 }
 
 .active {
@@ -24,6 +24,31 @@
   flex: 1 1 auto;
 }
 
-.mat-toolbar {
-  height: auto;
+.mat-menu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-bottom: 1px solid;
+}
+
+.nav-caption {
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.nav-icon {
+  transform: scale(1.5);
+  vertical-align: middle;
+}
+
+@media (max-width: 599px) {
+  .mat-toolbar-container {
+    display: none;
+  }
+}
+@media (min-width: 600px) {
+  .mat-menu-container {
+    display: none;
+  }
 }
