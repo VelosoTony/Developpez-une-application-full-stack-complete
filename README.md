@@ -1,9 +1,10 @@
 <p align="center">
   <img src="front\src\assets\logo_p6.png" title="MDD" width="50%" height="50%">
 </p>
+
 # MDD - Monde de Dév
 
-![Java](https://img.shields.io/badge/Java-17.0.6-red) ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0.7-green) ![Spring Security](https://img.shields.io/badge/Spring-Security-darkgreen) ![Maven](https://img.shields.io/badge/Apache%20Maven-3.8.7-blueviolet) ![MySQL](https://img.shields.io/badge/MySQL-8.0.x-orange) ![Angular](https://img.shields.io/badge/Angular-16.0.1-red)
+![Java](https://img.shields.io/badge/Java-17.0.6-red) ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0.7-green) ![Spring Security](https://img.shields.io/badge/Spring-Security-darkgreen) ![Maven](https://img.shields.io/badge/Apache%20Maven-3.8.7-blueviolet) ![MySQL](https://img.shields.io/badge/MySQL-8.0.x-orange) ![Angular](https://img.shields.io/badge/Angular-16.0.1-red) ![Javadoc](https://img.shields.io/badge/Javadoc-3.5.0-red) ![SpringDoc](https://img.shields.io/badge/SpringDoc-2.1.0-green)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1, Node version 18.14.0, Package Manager version npm 9.6.6.
 
@@ -61,7 +62,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 > back\target\site\apidocs\index.html
 
-### Swagger Open API documentation is available (when the api is running) :
+### SpringDoc OpenAPI documentation is available (when the api is running) :
 
 > http://localhost:8080/swagger-ui/index.html#/
 
