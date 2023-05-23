@@ -1,0 +1,48 @@
+<div *ngIf="!onDetail; else detail">
+  <mat-card (click)="showDetail(post.id)" class="post-card">
+    <mat-card-header>
+      <mat-card-title>
+        {{ post.title | titlecase }}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-footer class="content">
+      <mat-card-subtitle class="column"
+        >Date:
+        <b>{{ post.createdDate | date : "dd/MM/yyyy" }}</b></mat-card-subtitle
+      >
+      <mat-card-subtitle class="column"
+        >Auteur: <b>{{ post.user.username | titlecase }}</b></mat-card-subtitle
+      >
+      <mat-card-subtitle class="column"
+        >Thème: <b>{{ post.topic.name | titlecase }}</b></mat-card-subtitle
+      >
+    </mat-card-footer>
+    <mat-card-content>
+      <p>{{ post.content | shorten : 250 }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<ng-template #detail>
+  <mat-card class="post-card-alone">
+    <mat-card-header>
+      <mat-card-title>
+        {{ post.title | titlecase }}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-footer class="content">
+      <mat-card-subtitle class="column"
+        >Date:
+        <b>{{ post.createdDate | date : "dd/MM/yyyy" }}</b></mat-card-subtitle
+      >
+      <mat-card-subtitle class="column"
+        >Auteur: <b>{{ post.user.username | titlecase }}</b></mat-card-subtitle
+      >
+      <mat-card-subtitle class="column"
+        >Thème: <b>{{ post.topic.name | titlecase }}</b></mat-card-subtitle
+      >
+    </mat-card-footer>
+    <mat-card-content>
+      <p>{{ post.content | shorten : 250 }}</p>
+    </mat-card-content>
+  </mat-card>
+</ng-template>

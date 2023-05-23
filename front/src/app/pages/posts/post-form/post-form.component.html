@@ -1,0 +1,51 @@
+<div class="flex-container">
+  <div>
+    <button mat-icon-button routerLink="/posts">
+      <mat-icon class="icon">arrow_back</mat-icon>
+    </button>
+  </div>
+  <div class="center">
+    <h1>Créer un nouvel article</h1>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="centerFlexCol">
+        <mat-form-field appearance="outline" style="width: 300px !important">
+          <mat-label>Sélectionner un thème</mat-label>
+          <mat-select formControlName="topicId">
+            <mat-option *ngFor="let topic of topics$ | async" [value]="topic.id"
+              >{{ topic.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 300px !important">
+          <mat-label>Titre</mat-label>
+          <input
+            matInput
+            placeholder="Titre de l'article"
+            formControlName="title"
+          />
+          <mat-error>Nombre de caractères min: 5 et max: 255</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 300px !important">
+          <mat-label>Contenu</mat-label>
+          <input
+            matInput
+            placeholder="Contenu de l'article"
+            formControlName="content"
+          />
+          <mat-error>Nombre de caractères min: 10</mat-error>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="form.invalid"
+        >
+          Créer
+        </button>
+        <span *ngIf="onError" class="error">
+          Erreur lors de la création de l'article.
+        </span>
+      </div>
+    </form>
+  </div>
+</div>

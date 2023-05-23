@@ -1,0 +1,30 @@
+<mat-card class="topic-card">
+  <mat-card-header>
+    <mat-card-title>
+      {{ topic.name | titlecase }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    {{ topic.description | titlecase }}
+  </mat-card-content>
+  <mat-card-footer>
+    <div style="text-align: center">
+      <button
+        *ngIf="!onProfile"
+        mat-raised-button
+        color="primary"
+        (click)="subscribe(topic.id.toString())"
+      >
+        <span>S'abonner</span>
+      </button>
+      <button
+        *ngIf="onProfile"
+        mat-raised-button
+        color="primary"
+        (click)="unsubscribe(topic.id.toString())"
+      >
+        <span>Se désabonner</span>
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

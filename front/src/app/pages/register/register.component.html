@@ -1,0 +1,44 @@
+<div class="flex-container">
+  <button mat-icon-button routerLink="/">
+    <mat-icon class="icon">arrow_back</mat-icon>
+  </button>
+  <div class="center">
+    <h1>Inscription</h1>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="centerFlexCol">
+        <mat-form-field appearance="outline" style="width: 300px !important">
+          <mat-label>Nom</mat-label>
+          <input
+            matInput
+            placeholder="Nom d'utilisateur"
+            formControlName="username"
+          />
+          <mat-error>Champ incorrect</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 300px !important">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email" />
+          <mat-error>Email incorrect</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 300px !important">
+          <mat-label>Mot de passe</mat-label>
+          <input
+            matInput
+            placeholder="Mot de passe"
+            formControlName="password"
+          />
+          <mat-error>Mot de passe incorrect</mat-error>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="form.invalid"
+        >
+          S'inscrire
+        </button>
+        <span *ngIf="onError">Une erreur est survenue</span>
+      </div>
+    </form>
+  </div>
+</div>

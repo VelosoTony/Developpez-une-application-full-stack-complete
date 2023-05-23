@@ -1,0 +1,19 @@
+<div class="flex-container">
+  <div>
+    <button mat-icon-button routerLink="/posts">
+      <mat-icon class="icon">arrow_back</mat-icon>
+    </button>
+  </div>
+  <div class="center">
+    <app-post-list-item [post]="post" [onDetail]="true"></app-post-list-item>
+    <hr
+      style="
+        color: lightgrey;
+        border: 0.5px solid;
+        width: 90%;
+        margin: 0 auto 15px auto;
+      "
+    />
+    <app-post-comments></app-post-comments>
+  </div>
+</div>

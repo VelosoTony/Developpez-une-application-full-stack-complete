@@ -1,0 +1,57 @@
+.comment-card {
+  align-items: flex-end;
+  height: auto;
+  width: 90%;
+  background-color: whitesmoke;
+  margin: 15px auto;
+}
+
+.comment-container {
+  display: flex;
+  height: auto;
+  flex-direction: column;
+}
+
+.comment-list {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.comment-form {
+  height: auto;
+  margin-top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.comment-input {
+  width: 60vw;
+  height: auto;
+  margin: auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 96%;
+  margin: 0;
+  padding: 0 2%;
+}
+.send-btn {
+  transform: rotate(-30deg) scale(2);
+}
+::ng-deep mat-grid-tile {
+  border-radius: 4px;
+  border: 1px solid lightgrey;
+  background-color: whitesmoke;
+}
+
+@media (max-width: 768px) {
+  .comment-input {
+    width: 90vw;
+  }
+}

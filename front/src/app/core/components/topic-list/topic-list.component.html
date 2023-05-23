@@ -1,0 +1,27 @@
+<div class="container" *ngIf="(topics$ | async)?.length; else emptyTopics">
+  <mat-grid-list
+    [cols]="breakpoint"
+    rowHeight="220px"
+    [gutterSize]="'10px'"
+    (window:resize)="onResize($event)"
+  >
+    <mat-grid-tile
+      class="mat-elevation-z4"
+      *ngFor="let topic of topics$ | async"
+    >
+      <app-topic-list-item
+        [topic]="topic"
+        [onProfile]="onProfile"
+        (topicUnsubscribed)="onTopicUnsubscribed($event)"
+        (topicSubscribed)="onTopicSubscribed($event)"
+      ></app-topic-list-item>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<ng-template #emptyTopics>
+  <!-- Content to display when the topics array is empty -->
+  <div class="center">
+    {{ onProfile ? "Aucun abonnement." : "Aucun thème non abonné." }}
+  </div>
+</ng-template>

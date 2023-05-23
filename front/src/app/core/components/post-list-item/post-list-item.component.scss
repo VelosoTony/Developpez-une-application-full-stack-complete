@@ -1,0 +1,37 @@
+.post-card {
+  height: 220px;
+  width: 45vw;
+  max-width: 500px;
+  cursor: pointer;
+  margin: auto;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.post-card-alone {
+  background-color: none;
+  border-radius: 0px;
+  height: auto;
+  width: 90%;
+  box-shadow: none;
+  margin: auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 96%;
+  margin: 10px 0;
+  padding: 0 2%;
+}
+.column {
+  flex: 33.33%;
+}
+
+@media (max-width: 768px) {
+  .post-card {
+    margin: 0;
+    width: 100vw;
+  }
+}
