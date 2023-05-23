@@ -6,15 +6,16 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-footer class="content">
-      <mat-card-subtitle class="column">{{
-        post.createdDate | date : "dd/MM/yyyy"
-      }}</mat-card-subtitle>
-      <mat-card-subtitle class="column">{{
-        post.user.username | titlecase
-      }}</mat-card-subtitle>
-      <mat-card-subtitle class="column">{{
-        post.topic.name | titlecase
-      }}</mat-card-subtitle>
+      <mat-card-subtitle class="column"
+        >Date:
+        <b>{{ post.createdDate | date : "dd/MM/yyyy" }}</b></mat-card-subtitle
+      >
+      <mat-card-subtitle class="column"
+        >Auteur: <b>{{ post.user.username | titlecase }}</b></mat-card-subtitle
+      >
+      <mat-card-subtitle class="column"
+        >Thème: <b>{{ post.topic.name | titlecase }}</b></mat-card-subtitle
+      >
     </mat-card-footer>
     <mat-card-content>
       <p>{{ post.content | shorten : 250 }}</p>
@@ -29,18 +30,19 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-footer class="content">
-      <mat-card-subtitle class="column">{{
-        post.createdDate | date : "dd/MM/yyyy"
-      }}</mat-card-subtitle>
-      <mat-card-subtitle class="column">{{
-        post.user.username | titlecase
-      }}</mat-card-subtitle>
-      <mat-card-subtitle class="column">{{
-        post.topic.name | titlecase
-      }}</mat-card-subtitle>
+      <mat-card-subtitle class="column"
+        >Date:
+        <b>{{ post.createdDate | date : "dd/MM/yyyy" }}</b></mat-card-subtitle
+      >
+      <mat-card-subtitle class="column"
+        >Auteur: <b>{{ post.user.username | titlecase }}</b></mat-card-subtitle
+      >
+      <mat-card-subtitle class="column"
+        >Thème: <b>{{ post.topic.name | titlecase }}</b></mat-card-subtitle
+      >
     </mat-card-footer>
     <mat-card-content>
-      <p>{{ post.content }}</p>
+      <p>{{ post.content | shorten : 250 }}</p>
     </mat-card-content>
   </mat-card>
 </ng-template>

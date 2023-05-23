@@ -1,11 +1,14 @@
 <div class="container" *ngIf="(topics$ | async)?.length; else emptyTopics">
   <mat-grid-list
     [cols]="breakpoint"
-    rowHeight="240px"
+    rowHeight="220px"
     [gutterSize]="'10px'"
     (window:resize)="onResize($event)"
   >
-    <mat-grid-tile *ngFor="let topic of topics$ | async">
+    <mat-grid-tile
+      class="mat-elevation-z4"
+      *ngFor="let topic of topics$ | async"
+    >
       <app-topic-list-item
         [topic]="topic"
         [onProfile]="onProfile"

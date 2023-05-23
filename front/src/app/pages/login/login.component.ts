@@ -32,7 +32,7 @@ export class LoginComponent {
     this.loginService.login(loginRequest).subscribe({
       next: (response: LoginResponse) => {
         this.sessionService.logIn(response);
-        this.router.navigate(['/topics']);
+        this.router.navigate(['/posts']);
       },
       error: (_error: any) => (this.onError = true),
     });

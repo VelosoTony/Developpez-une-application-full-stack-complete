@@ -22,7 +22,7 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchPosts();
-    this.breakpoint = window.innerWidth <= 600 ? 1 : 2;
+    this.breakpoint = window.innerWidth <= 768 ? 1 : 2;
   }
 
   ngOnDestroy(): void {
@@ -31,7 +31,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     }
   }
   onResize(event: Event): void {
-    this.breakpoint = window.innerWidth <= 600 ? 1 : 2;
+    this.breakpoint = window.innerWidth <= 768 ? 1 : 2;
   }
 
   public fetchPosts() {

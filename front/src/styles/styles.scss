@@ -18,31 +18,32 @@ body {
 }
 
 button {
-  margin: 15px;
-}
-
-a {
-  color: var(--primary-color);
-  font-weight: bold;
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--secondary-color);
+  margin: 10px 0;
 }
 
 h1 {
   text-align: center;
-  padding: 1em;
+  padding: 10px;
 }
+
 .container {
   margin: 0;
   padding: 0;
-  height: calc(100vh - 64px);
-  overflow: auto;
+  height: 100%;
+  overflow: none;
 }
 
-.center {
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.center{
+margin: 10px auto;
+text-align: center;
+}
+
+.centerFlexCol {
   height: auto;
   display: flex;
   align-items: center;
@@ -55,25 +56,4 @@ h1 {
 
 .icon {
   transform: scale(2);
-}
-
-mat-card-title {
-  font-size: 1.5rem;
-  margin: 1% 0;
-}
-mat-card-subtitle {
-  font-size: 1rem;
-  margin: 1% 0;
-}
-
-.flex-container {
-  display: flex;
-  flex-direction: row;
-}
-
-@media (max-width: 600px) {
-  .flex-container {
-    display: flex;
-    flex-direction: column;
-  }
 }

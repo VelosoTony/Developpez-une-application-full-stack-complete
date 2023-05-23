@@ -1,5 +1,11 @@
 <div class="mat-toolbar-container">
-  <mat-toolbar style="background-color: white; border-bottom: 1px solid">
+  <mat-toolbar
+    style="
+      background-color: white;
+      border-bottom: 1px solid;
+      margin-bottom: 10px;
+    "
+  >
     <img src="/assets/logo_p6.png" alt="logo" class="logo" />
     <span class="spacer"></span>
     <div *ngIf="isLogged$ | async">

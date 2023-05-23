@@ -42,12 +42,12 @@
   vertical-align: middle;
 }
 
-@media (max-width: 599px) {
+@media (max-width: 767px) {
   .mat-toolbar-container {
     display: none;
   }
 }
-@media (min-width: 600px) {
+@media (min-width: 768px) {
   .mat-menu-container {
     display: none;
   }

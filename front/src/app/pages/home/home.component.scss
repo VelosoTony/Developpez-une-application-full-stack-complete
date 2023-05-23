@@ -12,7 +12,7 @@
   height: auto; /* Maintain aspect ratio */
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .center {
     flex-direction: column;
   }

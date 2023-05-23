@@ -24,7 +24,7 @@ export class TopicListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchTopics();
-    this.breakpoint = window.innerWidth <= 600 ? 1 : 2;
+    this.breakpoint = window.innerWidth <= 768 ? 1 : 2;
   }
 
   ngOnDestroy(): void {
@@ -33,7 +33,7 @@ export class TopicListComponent implements OnInit, OnDestroy {
     }
   }
   onResize(event: Event): void {
-    this.breakpoint = window.innerWidth <= 600 ? 1 : 2;
+    this.breakpoint = window.innerWidth <= 768 ? 1 : 2;
   }
 
   public fetchTopics() {

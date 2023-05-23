@@ -1,25 +1,76 @@
-# P6-Full-Stack-reseau-dev
+<p align="center">
+  <img src="front\src\assets\logo_p6.png" title="MDD" width="50%" height="50%">
+</p>
+# MDD - Monde de Dév
 
-## Front
+![Java](https://img.shields.io/badge/Java-17.0.6-red) ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0.7-green) ![Spring Security](https://img.shields.io/badge/Spring-Security-darkgreen) ![Maven](https://img.shields.io/badge/Apache%20Maven-3.8.7-blueviolet) ![MySQL](https://img.shields.io/badge/MySQL-8.0.x-orange) ![Angular](https://img.shields.io/badge/Angular-16.0.1-red)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1, Node version 18.14.0, Package Manager version npm 9.6.6.
 
-Don't forget to install your node_modules before starting (`npm install`).
+## Prerequisites
 
-### Development server
+- This project run on **Java 17**, download [here](https://www.oracle.com/fr/java/technologies/downloads/).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Maven** is needed to build the project, download [here](https://maven.apache.org/download.cgi).
+
+- The database is manage on **MySQL**, download [here](https://dev.mysql.com/downloads/installer/).
+
+## Getting Started
+
+### 1. Clone the github repository
+
+> git clone https://github.com/VelosoTony/Developpez-une-application-full-stack-complete.git
+
+### 2. Create MySQL Database
+
+Start MySQL, connect to MySQL Command Line or GUI tool.
+
+Run the script below to create the **mdd** database.
+
+> resources\sql\complete_orion_mdd.sql
+
+## Back-End
+
+### Set the credential of database access of API
+
+> /src/main/resources/application.properties
+
+modify `spring.datasource.username` and `spring.datasource.password` with MySQL user/password.
+
+### Start the API using maven
+
+> mvn spring-boot:run
+
+_/!\ To run this command you need to be in the directory "\back" containing the file "pom.xml"._
+
+## Front-End
+
+_/!\ To run the command for front-end, go to the directory "\front"_
+
+Install your node_modules : `npm install -force --save-dev @angular-devkit/build-angular`\
+Run `ng serve` for a dev server.\
+Navigate to `http://localhost:4200/`.\
 
 ### Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-### Where to start
+## Documentation
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+### Javadoc documentation is available in :
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+> back\target\site\apidocs\index.html
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get ride of it.
+### Swagger Open API documentation is available (when the api is running) :
 
-Good luck!
+> http://localhost:8080/swagger-ui/index.html#/
+
+## Resources
+
+A postman collection could be use to test the API.
+
+> resources\postman\MDD.postman_collection.json
+
+A Mockoon configuration could be use to simulate the API.
+
+> resources\mockoon\mdd_mockoon.json

@@ -1,10 +1,11 @@
 .topic-card {
-  background-color: whitesmoke;
-  border-radius: 8px;
-  height: auto;
-  width: 95%;
+  height: 220px;
+  width: 45vw;
+  max-width: 500px;
   cursor: pointer;
   margin: 0 15px;
+  box-shadow: none;
+  background-color: transparent;
 }
 
 .content {
@@ -24,9 +25,9 @@ mat-card-title {
   padding: 2% 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .topic-card {
-    margin: 0 15px;
-    width: 95%;
+    margin: 0;
+    width: 100vw;
   }
 }
