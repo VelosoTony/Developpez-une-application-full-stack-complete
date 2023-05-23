@@ -17,6 +17,16 @@ body {
   margin: 0;
 }
 
+a {
+  color: var(--primary-color);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--secondary-color);
+}
+
 button {
   margin: 10px 0;
 }
@@ -38,9 +48,9 @@ h1 {
   flex-direction: row;
 }
 
-.center{
-margin: 10px auto;
-text-align: center;
+.center {
+  margin: 10px auto;
+  text-align: center;
 }
 
 .centerFlexCol {
