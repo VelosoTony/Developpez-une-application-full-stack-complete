@@ -1,3 +1,13 @@
+<div class="sort">
+  <button mat-button (click)="toggleSwitch()">
+    <div>
+      Trier par date
+      <mat-icon>
+        {{ sortAsc ? "arrow_upward" : "arrow_downward" }}
+      </mat-icon>
+    </div>
+  </button>
+</div>
 <div class="container" *ngIf="(posts$ | async)?.length; else emptyPosts">
   <mat-grid-list
     [cols]="breakpoint"

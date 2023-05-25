@@ -3,3 +3,13 @@
   border: 1px solid lightgrey;
   background-color: whitesmoke;
 }
+
+.sort {
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .sort {
+    text-align: center;
+  }
+}

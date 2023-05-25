@@ -1,4 +1,4 @@
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, map } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Post } from 'src/app/core/interfaces/post.interface';
 import { UserService } from '../../services/user.service';
@@ -10,10 +10,10 @@ import { PostService } from '../../services/post.service';
   styleUrls: ['./post-list.component.scss'],
 })
 export class PostListComponent implements OnInit, OnDestroy {
-  public posts!: Post[];
   public posts$!: Observable<Post[]>;
   private postSub!: Subscription;
   public breakpoint!: number;
+  public sortAsc: boolean = true;
 
   constructor(
     private postService: PostService,
@@ -35,7 +35,25 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   public fetchPosts() {
-    console.log('fetchPosts');
-    this.posts$ = this.postService.getAllPosts();
+    this.posts$ = this.postService.getAllPosts().pipe(
+      map(posts => {
+        return posts.sort((a, b) => {
+          const dateA = a.createdDate ? new Date(a.createdDate) : new Date(0);
+          const dateB = b.createdDate ? new Date(b.createdDate) : new Date(0);
+
+          if (this.sortAsc) {
+            return dateA.getTime() - dateB.getTime();
+          } else {
+            return dateB.getTime() - dateA.getTime();
+          }
+        });
+      })
+    );
   }
+
+  public toggleSwitch() {
+    this.sortAsc = !this.sortAsc;
+    this.fetchPosts();
+  }
+
 }
