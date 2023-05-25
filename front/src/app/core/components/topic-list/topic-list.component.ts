@@ -1,6 +1,6 @@
 import { UserService } from 'src/app/core/services/user.service';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Topic } from 'src/app/core/interfaces/topic.interface';
 import { TopicService } from 'src/app/core/services/topic.service';
 
@@ -9,11 +9,9 @@ import { TopicService } from 'src/app/core/services/topic.service';
   templateUrl: './topic-list.component.html',
   styleUrls: ['./topic-list.component.scss'],
 })
-export class TopicListComponent implements OnInit, OnDestroy {
-  public topics!: Topic[];
+export class TopicListComponent implements OnInit {
   public topics$!: Observable<Topic[]>;
-  private topicSub!: Subscription;
-  public breakpoint!: number;
+  public gridColumnNumber!: number;
 
   @Input() onProfile!: boolean;
 
@@ -23,41 +21,53 @@ export class TopicListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // Fetch the topics
     this.fetchTopics();
-    this.breakpoint = window.innerWidth <= 768 ? 1 : 2;
+
+    // Set the grid number of column
+    this.setGridColumNumber();
   }
 
-  ngOnDestroy(): void {
-    if (this.topicSub !== undefined) {
-      this.topicSub.unsubscribe();
-    }
+  /**
+   * Sets the number of grid columns based on the window width.
+   */
+  public setGridColumNumber() {
+    this.gridColumnNumber = window.innerWidth <= 768 ? 1 : 2;
   }
+
   onResize(event: Event): void {
-    this.breakpoint = window.innerWidth <= 768 ? 1 : 2;
+    // Set the grid number of column
+    this.setGridColumNumber();
   }
 
+  /**
+   * Fetches topics based on the context.
+   */
   public fetchTopics() {
-    console.log('fetchTopics');
     if (this.onProfile) {
+      // Fetch topics for user subscription when on profile page
       this.topics$ = this.userService.getUserSubscription();
     } else {
+      // Fetch unsubscribed topics when not on profile page
       this.topics$ = this.topicService.unsubscribedTopics();
     }
-
-    this.topicSub = this.topics$.subscribe(
-      (topics: Topic[]) => (this.topics = topics)
-    );
   }
 
+  /**
+   * Handles the event when a topic is unsubscribed.
+   * @param topic_id The ID of the topic to unsubscribe.
+   */
   public onTopicUnsubscribed(topic_id: string) {
-    console.log('Delete ' + topic_id);
     this.topicService
       .unsubscribeTopic(topic_id)
       .subscribe((_) => this.fetchTopics());
   }
 
+  /**
+   * Handles the event when a topic is subscribed.
+   * @param topic_id The ID of the topic to subscribe.
+   */
   public onTopicSubscribed(topic_id: string) {
-    console.log('Add ' + topic_id);
     this.topicService
       .subscribeTopic(topic_id)
       .subscribe((_) => this.fetchTopics());

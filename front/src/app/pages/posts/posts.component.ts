@@ -5,8 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss'],
 })
-export class PostsComponent {
-  constructor() {
-    /* TODO document why this constructor is empty */
-  }
-}
+export class PostsComponent {}

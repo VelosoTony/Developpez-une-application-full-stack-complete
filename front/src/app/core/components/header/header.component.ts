@@ -13,10 +13,7 @@ export class HeaderComponent {
   // get page from app-component in order to modify link active
   @Input() page!: string;
 
-  constructor(private router: Router, private sessionService: SessionService) {
-    // this.page = this.router.url;
-    //console.log('ActiveRoute : ' + this.page);
-  }
+  constructor(private router: Router, private sessionService: SessionService) {}
 
   public navToProfile(): void {
     this.router.navigateByUrl('profile');

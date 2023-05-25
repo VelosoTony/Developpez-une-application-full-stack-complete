@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-  public currentEmail!: String;
+  public currentEmail!: string;
   public hide = true;
   public user!: User;
   private userSub!: Subscription;
@@ -44,6 +44,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private matSnackBar: MatSnackBar
   ) {}
 
+  /**
+   * Custom validator function to validate that the new password
+   * and confirm password fields match each other.
+   */
   private passwordMatchValidator(control: AbstractControl) {
     const newPasswordControl = control.get('newPassword');
     const confirmPasswordControl = control.get('confirmPassword');
@@ -65,6 +69,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Retrieve user information
     this.userSub = this.userService.getUser().subscribe({
       next: (user: User) => {
         this.user = user;
@@ -97,6 +102,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/login');
   }
 
+  /**
+   * Handle update of username and email update
+   */
   public onSubmit() {
     const username = this.userForm.value.username!;
     const email = this.userForm.value.email!;
@@ -117,6 +125,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Handle update of user password
+   */
   public onSubmitPassword() {
     const pass = this.passwordForm.value.newPassword!;
     console.log('Update password [' + pass + ']');

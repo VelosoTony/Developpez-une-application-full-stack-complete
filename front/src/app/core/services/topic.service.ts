@@ -20,7 +20,6 @@ export class TopicService {
   }
 
   public subscribeTopic(id: string): Observable<void> {
-    console.log(`POST ${this.pathService}/${id}/subscribe`);
     return this.httpClient.post<void>(
       `${this.pathService}/${id}/subscribe`,
       null
@@ -28,7 +27,6 @@ export class TopicService {
   }
 
   public unsubscribeTopic(id: string): Observable<void> {
-    console.log(`DELETE ${this.pathService}/${id}/unsubscribe`);
     return this.httpClient.delete<void>(
       `${this.pathService}/${id}/unsubscribe`
     );

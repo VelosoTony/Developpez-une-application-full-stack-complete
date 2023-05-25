@@ -35,14 +35,16 @@ export class PostCommentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.postId = this.route.snapshot.paramMap.get('id')!;
-    console.log('ID ' + this.postId);
     this.comments$ = this.postService.getComments(this.postId);
   }
 
+  /**
+   * Submit method handles the comment form submlssion.
+   */
   public submit(): void {
     if (this.form.valid) {
       const commentCreateRequest = this.form.value as CommentCreateRequest;
-      console.log(commentCreateRequest);
+
       this.postService
         .createComment(this.postId, commentCreateRequest)
         .subscribe({
@@ -55,6 +57,7 @@ export class PostCommentsComponent implements OnInit {
         });
     }
   }
+
   private infoTip(message: string): void {
     this.matSnackBar.open(message, 'Close', { duration: 3000 });
   }

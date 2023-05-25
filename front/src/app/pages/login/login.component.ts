@@ -31,7 +31,10 @@ export class LoginComponent {
     const loginRequest = this.form.value as LoginRequest;
     this.loginService.login(loginRequest).subscribe({
       next: (response: LoginResponse) => {
+        // if login successed, the token is returned,
+        // then called the sessionService.logIn to store the token in LocalStorage
         this.sessionService.logIn(response);
+
         this.router.navigate(['/posts']);
       },
       error: (_error: any) => (this.onError = true),

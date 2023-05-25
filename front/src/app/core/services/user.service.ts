@@ -27,7 +27,6 @@ export class UserService {
 
   public updatePassword(password: string): Observable<User> {
     const body = { password: password };
-    console.log('User.service updatePassword ' + body);
     return this.httpClient.put<User>(this.pathService + '/password', body);
   }
 }

@@ -36,6 +36,9 @@ export class PostFormComponent {
     this.topics$ = this.topicService.all();
   }
 
+  /**
+   * Handles the creation of a post.
+   */
   public submit(): void {
     const postCreateRequest = this.form.value as PostCreateRequest;
     console.log(postCreateRequest);

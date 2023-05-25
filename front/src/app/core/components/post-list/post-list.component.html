@@ -10,7 +10,7 @@
 </div>
 <div class="container" *ngIf="(posts$ | async)?.length; else emptyPosts">
   <mat-grid-list
-    [cols]="breakpoint"
+    [cols]="gridColumnNumber"
     rowHeight="200px"
     [gutterSize]="'10px'"
     (window:resize)="onResize($event)"

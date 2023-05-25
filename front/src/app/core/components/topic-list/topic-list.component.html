@@ -1,6 +1,6 @@
 <div class="container" *ngIf="(topics$ | async)?.length; else emptyTopics">
   <mat-grid-list
-    [cols]="breakpoint"
+    [cols]="gridColumnNumber"
     rowHeight="220px"
     [gutterSize]="'10px'"
     (window:resize)="onResize($event)"
