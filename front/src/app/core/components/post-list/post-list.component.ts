@@ -12,7 +12,7 @@ import { PostService } from '../../services/post.service';
 export class PostListComponent implements OnInit {
   public posts$!: Observable<Post[]>;
   public gridColumnNumber!: number;
-  public sortAsc: boolean = true;
+  public sortAsc: boolean = false;
 
   constructor(
     private postService: PostService,
