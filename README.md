@@ -4,7 +4,7 @@
 
 # MDD - Monde de Dév
 
-![Java](https://img.shields.io/badge/Java-17.0.6-red) ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0.7-green) ![Spring Security](https://img.shields.io/badge/Spring-Security-darkgreen) ![Maven](https://img.shields.io/badge/Apache%20Maven-3.8.7-blueviolet) ![MySQL](https://img.shields.io/badge/MySQL-8.0.x-orange) ![Angular](https://img.shields.io/badge/Angular-16.0.1-red)  ![Javadoc](https://img.shields.io/badge/Javadoc-3.5.0-red) ![SpringDoc](https://img.shields.io/badge/SpringDoc-2.1.0-green)
+![Java](https://img.shields.io/badge/Java-17.0.6-red) ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0.7-green) ![Spring Security](https://img.shields.io/badge/Spring-Security-darkgreen) ![Maven](https://img.shields.io/badge/Apache%20Maven-3.8.7-blueviolet) ![MySQL](https://img.shields.io/badge/MySQL-8.0.x-orange) ![Angular](https://img.shields.io/badge/Angular-16.0.1-red) ![Javadoc](https://img.shields.io/badge/Javadoc-3.5.0-red) ![SpringDoc](https://img.shields.io/badge/SpringDoc-2.1.0-green)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1, Node version 18.14.0, Package Manager version npm 9.6.6.
 
@@ -40,21 +40,31 @@ modify `spring.datasource.username` and `spring.datasource.password` with MySQL 
 
 ### Start the API using maven
 
-> mvn spring-boot:run
+> `mvn spring-boot:run`
 
-_/!\ To run this command you need to be in the directory "\back" containing the file "pom.xml"._
+_**&tritime; Warning : to run this command you should be in the directory "\back" containing the file "pom.xml". &tritime;**_
 
 ## Front-End
 
-_/!\ To run the command for front-end, go to the directory "\front"_
+_**&tritime; Warning : to run following commands, you should be in the directory "\front". &tritime;**_
 
-Install your node_modules : `npm install`
-Run `ng serve` for a dev server.\
-Navigate to `http://localhost:4200/`.\
+Install your node_modules :
+
+> `npm install`
+
+Launch :
+
+> `ng serve`
+
+Navigate to `http://localhost:4200/`
 
 ### Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+To build the project, run this command:
+
+> `ng build`
+
+The build artifacts will be stored in the `dist/` directory.
 
 ## Documentation
 
