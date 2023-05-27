@@ -48,7 +48,7 @@ _/!\ To run this command you need to be in the directory "\back" containing the 
 
 _/!\ To run the command for front-end, go to the directory "\front"_
 
-Install your node_modules : `npm install -force --save-dev @angular-devkit/build-angular`\
+Install your node_modules : `npm install`
 Run `ng serve` for a dev server.\
 Navigate to `http://localhost:4200/`.\
 
