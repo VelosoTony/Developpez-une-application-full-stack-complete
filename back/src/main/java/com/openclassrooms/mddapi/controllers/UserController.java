@@ -141,7 +141,7 @@ public class UserController {
 	@GetMapping("/user/subscription")
 	@Operation(summary = "Get all topic subscribed by user", description = "Retrieve topics subscribed by authenticated user")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TopicResponse.class))),
 			@ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
 	public ResponseEntity<List<TopicResponse>> getUserSubscription() {
 

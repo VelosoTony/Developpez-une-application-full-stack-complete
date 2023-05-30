@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { PostCreateRequest } from 'src/app/core/interfaces/request/postCreateRequest.interface';
 import { Topic } from 'src/app/core/interfaces/topic.interface';
 import { PostService } from 'src/app/core/services/post.service';
@@ -13,9 +13,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './post-form.component.html',
   styleUrls: ['./post-form.component.scss'],
 })
-export class PostFormComponent {
+export class PostFormComponent implements OnDestroy {
   public onError = false;
   public topics$!: Observable<Topic[]>;
+  private createPostSub!: Subscription;
 
   public form = this.fb.group({
     topicId: ['', [Validators.required]],
@@ -36,22 +37,30 @@ export class PostFormComponent {
     this.topics$ = this.topicService.all();
   }
 
+  ngOnDestroy(): void {
+    if (this.createPostSub !== undefined) {
+      this.createPostSub.unsubscribe();
+    }
+  }
+
   /**
    * Handles the creation of a post.
    */
   public submit(): void {
     const postCreateRequest = this.form.value as PostCreateRequest;
     console.log(postCreateRequest);
-    this.postService.createPost(postCreateRequest).subscribe({
-      next: (_) => {
-        this.router.navigate(['/posts']);
-        this.infoTip('Article créé avec succès !');
-      },
-      error: (_error: any) => {
-        this.onError = true;
-        this.infoTip("Erreur à la création de l'article!");
-      },
-    });
+    this.createPostSub = this.postService
+      .createPost(postCreateRequest)
+      .subscribe({
+        next: (_) => {
+          this.router.navigate(['/posts']);
+          this.infoTip('Article créé avec succès !');
+        },
+        error: (_error: any) => {
+          this.onError = true;
+          this.infoTip("Erreur à la création de l'article!");
+        },
+      });
   }
   private infoTip(message: string): void {
     this.matSnackBar.open(message, 'Close', { duration: 3000 });

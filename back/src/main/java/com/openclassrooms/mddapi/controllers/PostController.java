@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import com.openclassrooms.mddapi.dto.request.CommentCreateRequest;
 import com.openclassrooms.mddapi.dto.request.PostCreateRequest;
 import com.openclassrooms.mddapi.dto.response.PostResponse;
-import com.openclassrooms.mddapi.dto.response.TopicResponse;
 import com.openclassrooms.mddapi.mapper.PostMapper;
 import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.models.Post;
@@ -58,7 +57,7 @@ public class PostController {
     @GetMapping("")
     @Operation(summary = "Get posts for user", description = "Retrieves information of posts related to topics subscribed by user")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TopicResponse.class))),
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PostResponse.class))),
             @ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
     public ResponseEntity<List<PostResponse>> getPostsForUser() {
 
@@ -76,7 +75,7 @@ public class PostController {
     @GetMapping("/{id}")
     @Operation(summary = "Get post by id", description = "Retrieve information of specified post by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TopicResponse.class))),
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PostResponse.class))),
             @ApiResponse(responseCode = "401", description = "unauthorized", content = @Content) })
     public ResponseEntity<PostResponse> getPostById(@PathVariable("id") Integer id) {
 

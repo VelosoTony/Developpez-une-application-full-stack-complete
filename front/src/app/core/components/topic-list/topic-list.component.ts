@@ -1,6 +1,6 @@
 import { UserService } from 'src/app/core/services/user.service';
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { Topic } from 'src/app/core/interfaces/topic.interface';
 import { TopicService } from 'src/app/core/services/topic.service';
 
@@ -9,9 +9,11 @@ import { TopicService } from 'src/app/core/services/topic.service';
   templateUrl: './topic-list.component.html',
   styleUrls: ['./topic-list.component.scss'],
 })
-export class TopicListComponent implements OnInit {
+export class TopicListComponent implements OnInit, OnDestroy {
   public topics$!: Observable<Topic[]>;
   public gridColumnNumber!: number;
+  private unsubscribeTopicSub!: Subscription;
+  private subscribeTopicSub!: Subscription;
 
   @Input() onProfile!: boolean;
 
@@ -26,6 +28,16 @@ export class TopicListComponent implements OnInit {
 
     // Set the grid number of column
     this.setGridColumNumber();
+  }
+
+  ngOnDestroy(): void {
+    if (this.unsubscribeTopicSub !== undefined) {
+      this.unsubscribeTopicSub.unsubscribe();
+    }
+
+    if (this.subscribeTopicSub !== undefined) {
+      this.subscribeTopicSub.unsubscribe();
+    }
   }
 
   /**
@@ -58,7 +70,7 @@ export class TopicListComponent implements OnInit {
    * @param topic_id The ID of the topic to unsubscribe.
    */
   public onTopicUnsubscribed(topic_id: string) {
-    this.topicService
+    this.unsubscribeTopicSub = this.topicService
       .unsubscribeTopic(topic_id)
       .subscribe((_) => this.fetchTopics());
   }
@@ -68,7 +80,7 @@ export class TopicListComponent implements OnInit {
    * @param topic_id The ID of the topic to subscribe.
    */
   public onTopicSubscribed(topic_id: string) {
-    this.topicService
+    this.subscribeTopicSub = this.topicService
       .subscribeTopic(topic_id)
       .subscribe((_) => this.fetchTopics());
   }

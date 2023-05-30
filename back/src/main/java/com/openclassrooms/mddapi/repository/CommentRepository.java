@@ -12,7 +12,8 @@ import com.openclassrooms.mddapi.models.Comment;
  * @author Tony
  * @version 1.0
  */
-public interface CommentRepository extends JpaRepository<Comment, Integer> {
+
+ public interface CommentRepository extends JpaRepository<Comment, Integer> {
     /**
      * Retrieves a list of comments associated with a specific post.
      *

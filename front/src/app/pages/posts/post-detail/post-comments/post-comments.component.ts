@@ -1,6 +1,6 @@
 import { FormBuilder, Validators } from '@angular/forms';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { Comment } from 'src/app/core/interfaces/comment.interface';
 import { PostService } from 'src/app/core/services/post.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,10 +12,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './post-comments.component.html',
   styleUrls: ['./post-comments.component.scss'],
 })
-export class PostCommentsComponent implements OnInit {
+export class PostCommentsComponent implements OnInit, OnDestroy {
   public onError = false;
   public comments$!: Observable<Comment[]>;
   public postId!: string;
+  private createCommentSub!: Subscription;
 
   public form = this.fb.group({
     content: [
@@ -38,6 +39,11 @@ export class PostCommentsComponent implements OnInit {
     this.comments$ = this.postService.getComments(this.postId);
   }
 
+  ngOnDestroy(): void {
+    if (this.createCommentSub !== undefined) {
+      this.createCommentSub.unsubscribe();
+    }
+  }
   /**
    * Submit method handles the comment form submlssion.
    */
@@ -45,7 +51,7 @@ export class PostCommentsComponent implements OnInit {
     if (this.form.valid) {
       const commentCreateRequest = this.form.value as CommentCreateRequest;
 
-      this.postService
+      this.createCommentSub = this.postService
         .createComment(this.postId, commentCreateRequest)
         .subscribe({
           next: (resp) => {

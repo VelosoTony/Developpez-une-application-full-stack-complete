@@ -34,9 +34,13 @@ Run the script below to create the **mdd** database.
 
 ### Set the credential of database access of API
 
-> /src/main/resources/application.properties
+declare system environment variables to set database access parameters :
 
-modify `spring.datasource.username` and `spring.datasource.password` with MySQL user/password.
+> `MYSQL_HOST` : hostname of the MySQL Server (defaut: localhost).
+
+> `MYSQL_USERNAME` : username account of MySQL Server.
+
+> `MYSQL_PASSWORD` : password of MySQL Server user.
 
 ### Start the API using maven
 
